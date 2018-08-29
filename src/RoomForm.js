@@ -1,5 +1,7 @@
-import React, { Component } from 'react'
-import { StyleSheet, css } from 'aphrodite'
+import React, { Component } from 'react';
+import { StyleSheet, css } from 'aphrodite';
+import Select from 'react-select';
+
 class RoomForm extends Component {
     state = {
         room: {
@@ -18,6 +20,24 @@ class RoomForm extends Component {
 
         room[target.name] = value
         this.setState({ room })
+    }
+
+    handleSelectChange = (selectedValue) => {
+        const room = { ...this.state.room }
+        room.users = selectedValue
+        
+        this.setState({ room })
+        console.log(selectedValue)
+    }
+
+    users = () => {
+        return Object.keys(this.props.users).map(uid => {
+            const user = this.props.users[uid]
+            return {
+                value: uid,
+                label: `${user.displayName} (${user.email})`
+            }
+        })
     }
 
     handleSubmit = e => {
@@ -67,21 +87,21 @@ class RoomForm extends Component {
                                 onChange={this.handleChange}
                             />
                         </p>
-                        {!this.state.room.isPublic && (<p>
+                        {!this.state.room.isPublic && (<div>
                             <label
                                 htmlFor="users"
                                 className={css(styles.label)}
                             >
                                 Add users
                             </label>
-                            <input
-                                type="text"
+                            <Select
+                                isMulti
                                 name="users"
-                                className={css(styles.input, styles.textInput)}
+                                options={this.users()}
                                 value={this.state.room.users}
-                                onChange={this.handleChange}
+                                onChange={this.handleSelectChange}
                             />
-                        </p>)}
+                        </div>)}
                         <div className={css(styles.buttonContainer)}>
                             <button type="button" className={css(styles.button, styles.cancel)} onClick={this.props.history.goBack}>Cancel</button>
                             <button className={css(styles.button)} type="submit">Create Room</button>
