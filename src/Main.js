@@ -76,7 +76,7 @@ class Main extends Component {
             <div className='Main' style={styles}>
                 <Switch>
                     <Route path="/new-room"
-                        render={routerProps => (<RoomForm addRoom={this.addRoom} {...routerProps} />)}
+                        render={routerProps => (<RoomForm users={this.props.users} addRoom={this.addRoom} {...routerProps} />)}
                     />
                     <Route path="/rooms/:roomName"
                         render={() => (
@@ -84,6 +84,7 @@ class Main extends Component {
                                 <Sidebar
                                     rooms={this.state.rooms}
                                     signOut={this.props.signOut}
+                                    users={this.props.users}
                                     user={this.props.user}
                                 />
                                 <Chat

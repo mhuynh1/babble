@@ -4,13 +4,19 @@ class RoomForm extends Component {
     state = {
         room: {
             name: '',
-            description: ''
+            description: '',
+            isPublic: true,
+            users: []
         }
     }
 
     handleChange = e => {
         const room = { ...this.state.room }
-        room[e.target.name] = e.target.value
+        const target = e.target
+        const value = target.type === 'checkbox' ? target.checked : target.value
+
+
+        room[target.name] = value
         this.setState({ room })
     }
 
@@ -26,6 +32,17 @@ class RoomForm extends Component {
                 <main className={css(styles.main)}>
                     <h2 className={css(styles.h2)}>Create a new room</h2>
                     <form className={css(styles.form)} onSubmit={this.handleSubmit}>
+                        <p className="inputGroup">
+                            <label className={css(styles.label)}>
+                                <input
+                                    type="checkbox"
+                                    name="isPublic"
+                                    checked={this.state.room.isPublic}
+                                    onChange={this.handleChange}
+                                />
+                                Public
+                                </label>
+                        </p>
                         <p className="inputGroup">
                             <label className={css(styles.label)} htmlFor="name">Room name:</label>
                             <input
@@ -50,6 +67,21 @@ class RoomForm extends Component {
                                 onChange={this.handleChange}
                             />
                         </p>
+                        {!this.state.room.isPublic && (<p>
+                            <label
+                                htmlFor="users"
+                                className={css(styles.label)}
+                            >
+                                Add users
+                            </label>
+                            <input
+                                type="text"
+                                name="users"
+                                className={css(styles.input, styles.textInput)}
+                                value={this.state.room.users}
+                                onChange={this.handleChange}
+                            />
+                        </p>)}
                         <div className={css(styles.buttonContainer)}>
                             <button type="button" className={css(styles.button, styles.cancel)} onClick={this.props.history.goBack}>Cancel</button>
                             <button className={css(styles.button)} type="submit">Create Room</button>

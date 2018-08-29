@@ -66,6 +66,11 @@ class App extends Component {
     auth.signOut();
   }
   render() {
+    const mainProps = {
+      user: this.state.user,
+      users: this.state.users,
+      signOut: this.signOut,
+    }
     return (
       <div className="App">
         <Switch>
@@ -79,8 +84,7 @@ class App extends Component {
             render={routerProps => (
               this.signedIn()
                 ? <Main
-                  user={this.state.user}
-                  signOut={this.signOut}
+                  {...mainProps}
                   {...routerProps}
                 />
                 : <Redirect to="/sign-in" />
@@ -90,8 +94,7 @@ class App extends Component {
             render={routerProps => (
               this.signedIn()
                 ? <Main
-                  user={this.state.user}
-                  signOut={this.signOut}
+                  {...mainProps}
                   {...routerProps}
                 />
                 : <Redirect to="/sign-in" />
