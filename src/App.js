@@ -4,7 +4,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import './App.css';
 import Main from './Main';
 import SignIn from './SignIn';
-import { auth } from './base'
+import base, { auth } from './base'
 
 class App extends Component {
   constructor() {
@@ -12,11 +12,17 @@ class App extends Component {
     const user = JSON.parse(localStorage.getItem('user'))
 
     this.state = {
-      user: user || {}
+      user: user || {},
+      users: {}
     }
   }
 
   componentDidMount() {
+    base.syncState('users', {
+      context: this,
+      state: 'users',
+    })
+
     //listen for auth state change - sign-in is a change, sign-out is a change
     auth.onAuthStateChanged(user => {
       if (user) {
@@ -37,7 +43,11 @@ class App extends Component {
       photoUrl: oAuthUser.photoURL
     }
 
-    this.setState({ user })
+    //add or update users list
+    const users = { ...this.state.users }
+    users[user.uid] = user
+
+    this.setState({ user, users })
     localStorage.setItem('user', JSON.stringify(user))
   }
 
@@ -72,9 +82,9 @@ class App extends Component {
                   user={this.state.user}
                   signOut={this.signOut}
                   {...routerProps}
-                /> 
+                />
                 : <Redirect to="/sign-in" />
-          )}
+            )}
           />
           <Route path="/"
             render={routerProps => (

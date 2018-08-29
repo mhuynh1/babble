@@ -8,11 +8,9 @@ import RoomForm from './RoomForm';
 
 class Main extends Component {
     state = {
-        currentRoom: {
-            name: 'general',
-            description: 'a safe space for general topics'
-        },
-        rooms: {}
+        currentRoom: {},
+        rooms: {},
+        users: {}
     }
 
     componentDidMount() {
