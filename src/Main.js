@@ -59,8 +59,15 @@ class Main extends Component {
 
     addRoom = room => {
         const rooms = { ...this.state.rooms }
-        rooms[room.name] = room
+        const { user } = this.props
 
+        if (!room.isPublic){
+            room.users.push({
+                label:`${user.displayName} (${user.email})`,
+                value: user.uid
+            })
+        }
+        rooms[room.name] = room
         this.setState({ rooms })
     }
 
@@ -97,7 +104,7 @@ class Main extends Component {
             <div className='Main' style={styles}>
                 <Switch>
                     <Route path="/new-room"
-                        render={routerProps => (<RoomForm users={this.props.users} addRoom={this.addRoom} {...routerProps} />)}
+                        render={routerProps => (<RoomForm user={this.props.user} users={this.props.users} addRoom={this.addRoom} {...routerProps} />)}
                     />
                     <Route path="/rooms/:roomName"
                         render={() => (

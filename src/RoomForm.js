@@ -25,13 +25,15 @@ class RoomForm extends Component {
     handleSelectChange = (selectedValue) => {
         const room = { ...this.state.room }
         room.users = selectedValue
-        
+
         this.setState({ room })
         console.log(selectedValue)
     }
 
     users = () => {
-        return Object.keys(this.props.users).map(uid => {
+        const { users } = this.props
+        delete users[this.props.user.uid]
+        return Object.keys(users).map(uid => {
             const user = this.props.users[uid]
             return {
                 value: uid,
