@@ -9,8 +9,7 @@ import RoomForm from './RoomForm';
 class Main extends Component {
     state = {
         currentRoom: {},
-        rooms: {},
-        users: {}
+        rooms: {}
     }
 
     componentDidMount() {
@@ -22,8 +21,9 @@ class Main extends Component {
                     name: 'general',
                     description: 'a safe space for general topics'
                 }
-            },            then: this.setRoomFromRoute,
-            
+            },
+            then: this.setRoomFromRoute,
+
         })
     }
 
@@ -42,7 +42,7 @@ class Main extends Component {
     }
 
     setCurrentRoom = roomName => {
-        const currentRoom = this.state.rooms[roomName]
+        const currentRoom = this.filteredRooms().find(room => room.name === roomName)
 
         if (currentRoom) {
             this.setState({ currentRoom })
@@ -52,7 +52,7 @@ class Main extends Component {
     }
 
     loadValidRoom = () => {
-        const roomName = Object.keys(this.state.rooms).find(roomName => this.state.rooms[roomName])
+        const roomName = this.filteredRoomNames().find(roomName => this.state.rooms[roomName])
 
         this.props.history.push(`/rooms/${roomName}`)
     }
