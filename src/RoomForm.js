@@ -78,7 +78,6 @@ class RoomForm extends Component {
                         <p className="inputGroup">
                             <label className={css(styles.label)} htmlFor="description">Room description:</label>
                             <input
-                                autoFocus
                                 required
                                 type="text"
                                 name="description"
