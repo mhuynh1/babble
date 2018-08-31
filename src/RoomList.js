@@ -16,10 +16,10 @@ const RoomList = ({ rooms, setCurrentRoom }) => {
 
             <ul className={css(styles.list)}>
                 {
-                    Object.keys(rooms).map(
-                        roomName => <Room
-                            key={roomName}
-                            roomName={roomName}
+                    rooms.map(
+                        room => <Room
+                            key={room.name}
+                            roomName={room.name}
                             setCurrentRoom={setCurrentRoom}
                         />
                     )

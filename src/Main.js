@@ -22,8 +22,8 @@ class Main extends Component {
                     name: 'general',
                     description: 'a safe space for general topics'
                 }
-            },
-            then: this.setRoomFromRoute,
+            },            then: this.setRoomFromRoute,
+            
         })
     }
 
@@ -68,7 +68,28 @@ class Main extends Component {
         const rooms = { ...this.state.rooms }
         rooms[room.name] = null
 
-        this.setState({ rooms }, this.loadValidRoom,)
+        this.setState({ rooms }, this.loadValidRoom)
+    }
+
+    filteredRooms = () => {
+        return this.filteredRoomNames()
+            .map(roomName => this.state.rooms[roomName])
+    }
+
+    filteredRoomNames = () => {
+        //only show public rooms or rooms where user is in list
+        return Object.keys(this.state.rooms)
+            .filter(roomName => {
+                const room = this.state.rooms[roomName]
+                if (!room) return false
+                return room.isPublic || this.isRoomMember(room)
+            })
+    }
+
+    isRoomMember = (room) => {
+        //check if currentUser is in list of users of private room
+        const members = room.users || []
+        return members.find(userOption => userOption.value === this.props.user.uid)
     }
 
     render() {
@@ -82,7 +103,8 @@ class Main extends Component {
                         render={() => (
                             <Fragment>
                                 <Sidebar
-                                    rooms={this.state.rooms}
+                                    rooms={this.filteredRooms()}
+                                    // rooms={this.state.rooms}
                                     signOut={this.props.signOut}
                                     users={this.props.users}
                                     user={this.props.user}
