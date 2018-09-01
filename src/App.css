@@ -3,3 +3,12 @@
 body {
   font-family: 'Raleway', sans-serif;
 }
+
+.Select-control>div:first-child {
+  border: none;
+  background: none;
+}
+
+.Select-control div {
+  font-size: 12px;
+}

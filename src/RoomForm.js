@@ -98,9 +98,11 @@ class RoomForm extends Component {
                             <Select
                                 isMulti
                                 name="users"
+                                className={`Select-control ${css(styles.input)}`}
                                 options={this.users()}
                                 value={this.state.room.users}
                                 onChange={this.handleSelectChange}
+                                placeholder='add members'
                             />
                         </div>)}
                         <div className={css(styles.buttonContainer)}>
