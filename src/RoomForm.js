@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import Select from 'react-select';
+import { CancelButton, SubmitButton } from './FormButtons';
 
 class RoomForm extends Component {
     state = {
@@ -106,8 +107,8 @@ class RoomForm extends Component {
                             />
                         </div>)}
                         <div className={css(styles.buttonContainer)}>
-                            <button type="button" className={css(styles.button, styles.cancel)} onClick={this.props.history.goBack}>Cancel</button>
-                            <button className={css(styles.button)} type="submit">Create Room</button>
+                            <CancelButton history={this.props.history}/>
+                            <SubmitButton />
                         </div>
                     </form>
                 </main>
