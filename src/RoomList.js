@@ -25,11 +25,13 @@ const RoomList = ({ rooms, setCurrentRoom }) => {
                     )
                 }
             </ul>
-            <h2 className={css(styles.h2)}>Direct Message</h2>
-            <Link to="/new-direct-message" className={css(styles.button)}>
+            <div className={css(styles.heading)}>
+                <h2 className={css(styles.h2)}>Direct Message</h2>
+                <Link to="/new-direct-message" className={css(styles.button)}>
                     <i className="fa fa-plus-circle" title="add room"></i>
                 </Link>
-        </nav>
+            </div>
+        </nav >
     )
 }
 
