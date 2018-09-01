@@ -48,7 +48,7 @@ export const NewRoomInputs = ({ room, handleChange }) => {
 
 export const DmInputs = ({ value, options, handleSelectChange }) => {
     return (
-        <p>
+        <Fragment>
             <label
                 htmlFor="users"
                 className={css(styles.label)}
@@ -64,7 +64,7 @@ export const DmInputs = ({ value, options, handleSelectChange }) => {
                 onChange={handleSelectChange}
                 placeholder='add members'
             />
-        </p>
+        </Fragment>
     )
 }
 
