@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, css } from 'aphrodite';
-import Select from 'react-select';
 import { CancelButton, SubmitButton } from './FormButtons';
-import { NewRoomInputs, DmInputs } from './FormInputs';
+import { NewRoomInputs, MultipleSelectInput } from './FormInputs';
 
 class RoomDmForm extends Component {
     state = {
@@ -62,7 +61,8 @@ class RoomDmForm extends Component {
                     <form className={css(styles.form)}>
                         {
                             this.props.match.url === '/new-direct-message'
-                                ? <DmInputs
+                                ? <MultipleSelectInput
+                                    labelText='start a conversation'
                                     options={this.users()}
                                     value={this.state.room.users}
                                     handleSelectChange={this.handleSelectChange}
@@ -75,23 +75,16 @@ class RoomDmForm extends Component {
                         }
                         {
                             !this.state.room.isPublic
-                            && <div>
-                                <label
-                                    htmlFor="users"
-                                    className={css(styles.label)}
-                                >
-                                    Add users
-                            </label>
-                                <Select
-                                    isMulti
-                                    name="users"
-                                    className={`Select-control ${css(styles.input)}`}
-                                    options={this.users()}
-                                    value={this.state.room.users}
-                                    onChange={this.handleSelectChange}
-                                    placeholder='add members'
-                                />
-                            </div>
+                            && (<MultipleSelectInput
+                                isMulti
+                                name="users"
+                                labelText="Add users"
+                                className={`Select-control ${css(styles.input)}`}
+                                options={this.users()}
+                                value={this.state.room.users}
+                                onChange={this.handleSelectChange}
+                                placeholder='add members'
+                            />)
                         }
                         <div className={css(styles.buttonContainer)}>
                             <CancelButton history={this.props.history} />
@@ -139,29 +132,13 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         boxShadow: '0 1px 1px rgba(0,0,0,.1)',
         marginBottom: '2rem',
-        padding: '0 2rem 2rem',
-    },
-    label: {
-        display: 'block',
-        textTransform: 'uppercase',
-        color: '#999',
-    },
-    input: {
-        fontSize: '1.5rem',
-        border: 0,
-        borderBottom: '1px solid black',
-        margin: '1rem auto',
-        textAlign: 'center',
-        padding: '0.5rem',
-        ':focus': {
-            outline: 0,
-        },
-    },
-    textInput: {
-        width: '20rem',
+        padding: '2rem',
     },
     h2: {
-        fontWeight: 'normal',
+        color: 'rgb(255, 51, 68)',
+        fontWeight: 400,
+        lineHeight: '80px',
+        fontSize: '2rem',
     },
     buttonContainer: {
         display: 'flex',

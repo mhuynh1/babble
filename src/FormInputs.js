@@ -46,14 +46,14 @@ export const NewRoomInputs = ({ room, handleChange }) => {
     )
 }
 
-export const DmInputs = ({ value, options, handleSelectChange }) => {
+export const MultipleSelectInput = ({ labelText, value, options, handleSelectChange }) => {
     return (
         <Fragment>
             <label
                 htmlFor="users"
                 className={css(styles.label)}
             >
-                Add users
+                {labelText}
             </label>
             <Select
                 isMulti
@@ -84,5 +84,8 @@ const styles = StyleSheet.create({
         ':focus': {
             outline: 0,
         },
-    }
+    },
+    textInput: {
+        width: '20rem',
+    },
 })
