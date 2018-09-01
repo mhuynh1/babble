@@ -7,8 +7,8 @@ export const CancelButton = ({ history }) => {
     )
 }
 
-export const SubmitButton = () => {
-    return (<button className={css(styles.button)} type="submit">Create Room</button>)
+export const SubmitButton = (props) => {
+    return (<button className={css(styles.button)} type="submit">{props.btnText}</button>)
 }
 
 const styles = StyleSheet.create({

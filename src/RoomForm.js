@@ -108,7 +108,7 @@ class RoomForm extends Component {
                         </div>)}
                         <div className={css(styles.buttonContainer)}>
                             <CancelButton history={this.props.history}/>
-                            <SubmitButton />
+                            <SubmitButton btnText={this.props.match.url === '/new-direct-message' ? 'Go' : 'Create Room'}/>
                         </div>
                     </form>
                 </main>
