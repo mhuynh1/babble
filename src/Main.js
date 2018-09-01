@@ -67,6 +67,11 @@ class Main extends Component {
                 value: user.uid
             })
         }
+
+        if (room.isDm) {
+            room.name = room.users.map(u => u.label.split(' ')).map(n => n[0]).join(', ')
+        }
+
         rooms[room.name] = room
         this.setState({ rooms })
     }

@@ -19,7 +19,10 @@ class MessageList extends Component {
             <div className="MessageList" style={styles.messageList} >
                 <div className="roomAnnouncement" style={styles.roomAnnouncement}>
                     <h3 style={styles.h3}>#{currentRoom.name}</h3>
-                    <p>{`This is the very beginning of the #${currentRoom.name} room.`}</p>
+                    {currentRoom.isDm
+                        ? <p>This is the very beginning of the direct message.</p>
+                        : <p>{`This is the very beginning of the #${currentRoom.name} room.`}</p>
+                    }
                 </div>
                 {messages.map(msg => (<Message user={user} key={msg.id} message={msg} />))}
                 <div ref={el => this.messagesEnd = el}></div>

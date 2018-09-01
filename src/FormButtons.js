@@ -13,12 +13,12 @@ export const CancelButton = ({ history }) => {
     )
 }
 
-export const SubmitButton = ({ btnText, url, sendDm, handleSubmit }) => {
+export const SubmitButton = ({ btnText, handleSubmit }) => {
     return (
         <button
             className={css(styles.button)}
-            type='button'
-            onClick={url === '/new-room' ? handleSubmit : sendDm}
+            type='submit'
+            onSubmit={handleSubmit}
         >
             {btnText}
         </button>)

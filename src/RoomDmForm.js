@@ -45,12 +45,15 @@ class RoomDmForm extends Component {
 
     handleSubmit = e => {
         e.preventDefault()
-        this.props.addRoom(this.state.room)
-        this.props.history.goBack()
-    }
+        const { room } = this.state
 
-    sendDm = () => {
-        console.log('sending dm')
+        if (this.props.match.url === '/new-direct-message') {
+            room.isDm = true
+            room.isPublic = false
+        }
+
+        this.props.addRoom(room)
+        this.props.history.goBack()
     }
 
     render() {
@@ -58,7 +61,7 @@ class RoomDmForm extends Component {
             <div className={`RoomDmForm ${css(styles.RoomDmForm)}`}>
                 <main className={css(styles.main)}>
                     <h2 className={css(styles.h2)}>{this.props.match.url === '/new-direct-message' ? 'Direct Message' : 'Create New Room'}</h2>
-                    <form className={css(styles.form)}>
+                    <form className={css(styles.form)} onSubmit={this.handleSubmit}>
                         {
                             this.props.match.url === '/new-direct-message'
                                 ? <MultipleSelectInput
@@ -91,7 +94,6 @@ class RoomDmForm extends Component {
                             <SubmitButton
                                 url={this.props.match.url}
                                 handleSubmit={this.handleSubmit}
-                                sendDm={this.sendDm}
                                 btnText={this.props.match.url === '/new-direct-message' ? 'Go' : 'Create Room'}
                             />
                         </div>
