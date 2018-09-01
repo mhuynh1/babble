@@ -50,12 +50,16 @@ class RoomDmForm extends Component {
         this.props.history.goBack()
     }
 
+    sendDm = () => {
+        console.log('sending dm')
+    }
+
     render() {
         return (
             <div className={`RoomDmForm ${css(styles.RoomDmForm)}`}>
                 <main className={css(styles.main)}>
                     <h2 className={css(styles.h2)}>{this.props.match.url === '/new-direct-message' ? 'Direct Message' : 'Create New Room'}</h2>
-                    <form className={css(styles.form)} onSubmit={this.handleSubmit}>
+                    <form className={css(styles.form)}>
                         {
                             this.props.match.url === '/new-direct-message'
                                 ? <DmInputs
@@ -71,7 +75,7 @@ class RoomDmForm extends Component {
                         }
                         {
                             !this.state.room.isPublic
-                            && (<div>
+                            && <div>
                                 <label
                                     htmlFor="users"
                                     className={css(styles.label)}
@@ -87,11 +91,16 @@ class RoomDmForm extends Component {
                                     onChange={this.handleSelectChange}
                                     placeholder='add members'
                                 />
-                            </div>)
+                            </div>
                         }
                         <div className={css(styles.buttonContainer)}>
                             <CancelButton history={this.props.history} />
-                            <SubmitButton btnText={this.props.match.url === '/new-direct-message' ? 'Go' : 'Create Room'} />
+                            <SubmitButton
+                                url={this.props.match.url}
+                                handleSubmit={this.handleSubmit}
+                                sendDm={this.sendDm}
+                                btnText={this.props.match.url === '/new-direct-message' ? 'Go' : 'Create Room'}
+                            />
                         </div>
                     </form>
                 </main>

@@ -3,12 +3,25 @@ import { StyleSheet, css } from 'aphrodite';
 
 export const CancelButton = ({ history }) => {
     return (
-        <button type="button" className={css(styles.button, styles.cancel)} onClick={history.goBack}>Cancel</button>
+        <button
+            type="button"
+            className={css(styles.button, styles.cancel)}
+            onClick={history.goBack}
+        >
+            Cancel
+        </button>
     )
 }
 
-export const SubmitButton = (props) => {
-    return (<button className={css(styles.button)} type="submit">{props.btnText}</button>)
+export const SubmitButton = ({ btnText, url, sendDm, handleSubmit }) => {
+    return (
+        <button
+            className={css(styles.button)}
+            type='button'
+            onClick={url === '/new-room' ? handleSubmit : sendDm}
+        >
+            {btnText}
+        </button>)
 }
 
 const styles = StyleSheet.create({
