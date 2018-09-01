@@ -106,6 +106,9 @@ class Main extends Component {
                     <Route path="/new-room"
                         render={routerProps => (<RoomForm user={this.props.user} users={this.props.users} addRoom={this.addRoom} {...routerProps} />)}
                     />
+                    <Route path="/new-direct-message"
+                        render={routerProps => (<RoomForm user={this.props.user} users={this.props.users} addRoom={this.addRoom} {...routerProps} />)}
+                    />
                     <Route path="/rooms/:roomName"
                         render={() => (
                             <Fragment>
