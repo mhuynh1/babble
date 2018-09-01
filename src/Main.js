@@ -4,7 +4,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import base from './base'
 import Sidebar from './Sidebar'
 import Chat from './Chat'
-import RoomForm from './RoomForm';
+import RoomDmForm from './RoomDmForm';
 
 class Main extends Component {
     state = {
@@ -104,10 +104,10 @@ class Main extends Component {
             <div className='Main' style={styles}>
                 <Switch>
                     <Route path="/new-room"
-                        render={routerProps => (<RoomForm user={this.props.user} users={this.props.users} addRoom={this.addRoom} {...routerProps} />)}
+                        render={routerProps => (<RoomDmForm user={this.props.user} users={this.props.users} addRoom={this.addRoom} {...routerProps} />)}
                     />
                     <Route path="/new-direct-message"
-                        render={routerProps => (<RoomForm user={this.props.user} users={this.props.users} addRoom={this.addRoom} {...routerProps} />)}
+                        render={routerProps => (<RoomDmForm user={this.props.user} users={this.props.users} addRoom={this.addRoom} {...routerProps} />)}
                     />
                     <Route path="/rooms/:roomName"
                         render={() => (
