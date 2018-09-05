@@ -114,7 +114,7 @@ class Main extends Component {
                     <Route path="/new-direct-message"
                         render={routerProps => (<RoomDmForm user={this.props.user} users={this.props.users} addRoom={this.addRoom} {...routerProps} />)}
                     />
-                    <Route path="/rooms/:roomName"
+                    <Route path="/:roomtype/:roomName"
                         render={() => (
                             <Fragment>
                                 <Sidebar

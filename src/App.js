@@ -80,7 +80,7 @@ class App extends Component {
                 ? <Redirect to="/chat" />
                 : <SignIn />)}
           />
-          <Route path="/rooms/:roomName"
+          <Route path="/:roomtype/:roomName"
             render={routerProps => (
               this.signedIn()
                 ? <Main

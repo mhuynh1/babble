@@ -17,11 +17,12 @@ const RoomList = ({ rooms, setCurrentRoom }) => {
             <ul className={css(styles.list)}>
                 {
                     rooms.map(
-                        room => <RoomLink
-                            key={room.name}
-                            roomName={room.name}
-                            setCurrentRoom={setCurrentRoom}
-                        />
+                        room => room.isPublic && <RoomLink
+                        isPublic={room.isPublic}
+                        key={room.name}
+                        roomName={room.name}
+                        setCurrentRoom={setCurrentRoom}
+                    />
                     )
                 }
             </ul>
@@ -31,6 +32,18 @@ const RoomList = ({ rooms, setCurrentRoom }) => {
                     <i className="fa fa-plus-circle" title="add room"></i>
                 </Link>
             </div>
+            <ul className={css(styles.list)}>
+                {
+                    rooms.map(
+                        room => !room.isPublic && <RoomLink
+                        isPublic={room.isPublic}
+                        key={room.name}
+                        roomName={room.name}
+                        setCurrentRoom={setCurrentRoom}
+                    />
+                    )
+                }
+            </ul>
         </nav >
     )
 }

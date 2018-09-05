@@ -2,11 +2,11 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { StyleSheet, css } from 'aphrodite';
 
-const RoomLink = ({ roomName }) => {
+const RoomLink = ({ roomName, isPublic }) => {
     return (
         <li className={css(styles.item)}>
             <NavLink
-                to={`/rooms/${roomName}`}
+                to={isPublic ? `/rooms/${roomName}` :  `/dm/${roomName}` }
                 className={css(styles.link)}
             >
                 {roomName}
