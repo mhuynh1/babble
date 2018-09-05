@@ -14,7 +14,8 @@ const SidebarContent = ({ user, signOut, rooms, users, show }) => {
         <aside className={`Sidebar ${css(styles.sidebar)} ${show ? `sidedrawer open` : `sidedrawer`}`}>
             <UserInfo
                 signOut={signOut}
-                user={user} />
+                user={user} 
+            />
             <h1 className={css(styles.h1)}>babble </h1>
             <nav className={`RoomList ${css(styles.roomList)}`}>
                 <RoomList

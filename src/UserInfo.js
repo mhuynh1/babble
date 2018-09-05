@@ -6,10 +6,12 @@ const UserInfo = ({ user, signOut }) => {
     return (
         <div className="UserInfo" style={styles.userInfo}>
             <Avatar user={user} />
-            <div className="user" style={styles.user}>
-                {user.displayName}
+            <div style={styles.rightSide}>
+                <div className="user" style={styles.user}>
+                    {user.displayName}
+                </div>
+                <SignOutButton signOut={signOut} />
             </div>
-            <SignOutButton signOut={signOut}/>
         </div>)
 }
 const styles = {
@@ -19,9 +21,15 @@ const styles = {
         display: 'flex',
         alignItems: 'center',
     },
+    rightSide: {
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'space-between'
+
+    },
     user: {
         flex: 1,
-        maxWidth: '69.9px',
+        maxWidth: '120px',
         textOverflow: 'ellipsis',
         whiteSpace: 'nowrap',
         overflow: 'hidden',
