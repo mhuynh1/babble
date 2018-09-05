@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { StyleSheet, css } from 'aphrodite';
 
-const Room = ({ roomName }) => {
+const RoomLink = ({ roomName }) => {
     return (
         <li className={css(styles.item)}>
             <NavLink
@@ -33,4 +33,4 @@ const styles = StyleSheet.create({
         },
     }
 })
-export default Room;
+export default RoomLink;

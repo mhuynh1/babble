@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { StyleSheet, css } from 'aphrodite';
 
-import Room from './Room';
+import RoomLink from './RoomLink';
 
 const RoomList = ({ rooms, setCurrentRoom }) => {
     return (
@@ -17,7 +17,7 @@ const RoomList = ({ rooms, setCurrentRoom }) => {
             <ul className={css(styles.list)}>
                 {
                     rooms.map(
-                        room => <Room
+                        room => <RoomLink
                             key={room.name}
                             roomName={room.name}
                             setCurrentRoom={setCurrentRoom}
