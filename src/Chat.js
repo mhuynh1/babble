@@ -37,6 +37,11 @@ class Chat extends Component {
         })
     }
 
+    removeMessages = (currentRoom) => {
+        //remove messages associated with Room before removing Room
+        this.setState({ messages: null }, this.props.removeRoom(currentRoom))
+    }
+
     addMessage = body => {
         const messages = [...this.state.messages]
         const user = this.props.user
@@ -51,6 +56,7 @@ class Chat extends Component {
             <div className="Chat" style={styles.chat}>
                 <ChatHeader
                     removeRoom={this.props.removeRoom}
+                    removeMessages={this.removeMessages}
                     currentRoom={this.props.currentRoom}
                 />
                 <MessageList

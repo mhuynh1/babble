@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
-const ChatHeader = ({ currentRoom, removeRoom }) => {
+const ChatHeader = ({ currentRoom, removeMessages }) => {
 
     return (
         <header className={`ChatHeader ${css(styles.chatHeader)}`}>
@@ -11,7 +11,7 @@ const ChatHeader = ({ currentRoom, removeRoom }) => {
             </div>
             <button
                 className={css(styles.button)}
-                onClick={() => removeRoom(currentRoom)}
+                onClick={() => removeMessages(currentRoom)}
             >
                 <i className="far fa-trash-alt"></i>
             </button>
