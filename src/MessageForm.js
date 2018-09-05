@@ -49,10 +49,8 @@ const styles = StyleSheet.create({
         height: '3rem',
         display: 'flex',
         alignItems: 'stretch',
-        border: '2px solid #999',
-        borderRadius: '0.5rem',
-        margin: '0.25rem',
-        padding: 0
+        borderTop: '2px solid #ccc',
+        padding: '2px',
     },
     chatIcon: {
         display: 'flex',
@@ -73,13 +71,13 @@ const styles = StyleSheet.create({
     },
     button: {
         fontSize: '1.5rem',
-        backgroundColor: '#1A8FE3',
-        color: 'white',
+        backgroundColor: 'transparent',
+        color: '#ccc',
         paddingLeft: '1rem',
         paddingRight: '1rem',
         borderTopRightRadius: '0.5rem',
         borderBottomRightRadius: '0.5rem',
-        border: '1px solid white',
+        border: 'none',
     }
 
 })
