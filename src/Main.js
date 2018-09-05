@@ -1,15 +1,18 @@
 import React, { Component, Fragment } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
+import { StyleSheet, css } from 'aphrodite';
 
 import base from './base'
-import Sidebar from './Sidebar'
+import SidebarContent from './SidebarContent'
 import Chat from './Chat'
 import RoomDmForm from './RoomDmForm';
+import Backdrop from './Backdrop';
 
 class Main extends Component {
     state = {
         currentRoom: {},
-        rooms: {}
+        rooms: {},
+        sideDrawerOpen: false
     }
 
     componentDidMount() {
@@ -61,9 +64,9 @@ class Main extends Component {
         const rooms = { ...this.state.rooms }
         const { user } = this.props
 
-        if (!room.isPublic){
+        if (!room.isPublic) {
             room.users.push({
-                label:`${user.displayName} (${user.email})`,
+                label: `${user.displayName} (${user.email})`,
                 value: user.uid
             })
         }
@@ -104,9 +107,17 @@ class Main extends Component {
         return members.find(userOption => userOption.value === this.props.user.uid)
     }
 
+    handleToggleDrawer = () => (
+        this.setState(prev => ({ sideDrawerOpen: !prev.sideDrawerOpen }))
+    )
+
+    handleBackdropClick = () => (
+        this.setState({ sideDrawerOpen: false })
+    )
+
     render() {
         return (
-            <div className='Main' style={styles}>
+            <div className={`Main ${css(styles.main)}`}>
                 <Switch>
                     <Route path="/new-room"
                         render={routerProps => (<RoomDmForm user={this.props.user} users={this.props.users} addRoom={this.addRoom} {...routerProps} />)}
@@ -117,14 +128,18 @@ class Main extends Component {
                     <Route path="/:roomtype/:roomName"
                         render={() => (
                             <Fragment>
-                                <Sidebar
+                                <SidebarContent
+                                    show={this.state.sideDrawerOpen}
                                     rooms={this.filteredRooms()}
                                     // rooms={this.state.rooms}
                                     signOut={this.props.signOut}
                                     users={this.props.users}
                                     user={this.props.user}
                                 />
+                                {this.state.sideDrawerOpen && <Backdrop handleBackdropClick={this.handleBackdropClick} />}
+
                                 <Chat
+                                    handleToggleDrawer={this.handleToggleDrawer}
                                     removeRoom={this.removeRoom}
                                     user={this.props.user}
                                     currentRoom={this.state.currentRoom}
@@ -140,9 +155,13 @@ class Main extends Component {
         )
     }
 }
-const styles = {
-    display: 'flex',
-    alignItems: 'stretch',
-    height: '100vh'
-}
+const styles = StyleSheet.create({
+    main: {
+        '@media (min-width: 768px)': {
+            display: 'flex',
+            alignItems: 'stretch',
+            height: '100vh'
+        }
+    }
+})
 export default Main;

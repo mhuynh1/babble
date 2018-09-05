@@ -55,6 +55,7 @@ class Chat extends Component {
         return (
             <div className="Chat" style={styles.chat}>
                 <ChatHeader
+                    handleToggleDrawer={this.props.handleToggleDrawer}
                     removeRoom={this.props.removeRoom}
                     removeMessages={this.removeMessages}
                     currentRoom={this.props.currentRoom}
@@ -75,7 +76,8 @@ const styles = {
     chat: {
         display: 'flex',
         flexDirection: 'column',
-        flex: '1'
+        flex: '1',
+        height: '100vh'
     }
 
 }

@@ -1,14 +1,19 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
+import SidedrawerToggle from './SidedrawerToggle';
 
-const ChatHeader = ({ currentRoom, removeMessages }) => {
+const ChatHeader = ({ currentRoom, removeMessages, handleToggleDrawer }) => {
 
     return (
         <header className={`ChatHeader ${css(styles.chatHeader)}`}>
-            <div className="roomAnnouncement">
-                <h2 className={css(styles.h2)}>{currentRoom.name}</h2>
-                <p className={css(styles.p)}>{currentRoom.description}</p>
+            <div className={`roomAnnouncement ${css(styles.roomAnnouncement)}`}>
+                <SidedrawerToggle handleToggleDrawer={handleToggleDrawer} />
+                <div>
+                    <h2 className={css(styles.h2)}>{currentRoom.name}</h2>
+                    <p className={css(styles.p)}>{currentRoom.description}</p>
+                </div>
             </div>
+
             <button
                 className={css(styles.button)}
                 onClick={() => removeMessages(currentRoom)}
@@ -28,7 +33,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between'
     },
+    roomAnnouncement: {
+        display: 'flex',
+        alignItems: 'center'
+    },
     h2: {
+        display: 'flex',
         fontSize: '1.1rem',
         margin: 0,
     },
