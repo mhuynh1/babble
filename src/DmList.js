@@ -2,23 +2,20 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { StyleSheet, css } from 'aphrodite';
 
-import RoomLink from './RoomLink';
-
-const RoomList = ({ rooms }) => {
-
+import RoomLink from './RoomLink'
+const DmList = ({ rooms }) => {
     return (
         <Fragment>
             <div className={css(styles.heading)}>
-                <h2 className={css(styles.h2)}>Rooms</h2>
-                <Link to="/new-room" className={css(styles.button)}>
+                <h2 className={css(styles.h2)}>Direct Message</h2>
+                <Link to="/new-direct-message" className={css(styles.button)}>
                     <i className="fa fa-plus-circle" title="add room"></i>
                 </Link>
             </div>
-
             <ul className={css(styles.list)}>
                 {
                     rooms.map(
-                        room => <RoomLink
+                        room => !room.isPublic && <RoomLink
                             isPublic={room.isPublic}
                             key={room.name}
                             roomName={room.name}
@@ -29,7 +26,6 @@ const RoomList = ({ rooms }) => {
         </Fragment>
     )
 }
-
 const styles = StyleSheet.create({
     h2: {
         fontSize: '1rem',
@@ -61,4 +57,4 @@ const styles = StyleSheet.create({
         }
     },
 })
-export default RoomList;
+export default DmList;

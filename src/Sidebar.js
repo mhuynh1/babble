@@ -1,21 +1,33 @@
 import React from 'react';
+import { StyleSheet, css } from 'aphrodite';
 import UserInfo from './UserInfo';
 import RoomList from './RoomList';
+import DmList from './DmList';
 
 const Sidebar = ({ user, signOut, rooms, users }) => {
+    const publicRooms = [];
+    const dmRooms = [];
+    rooms.forEach(room => room.isPublic ? publicRooms.push(room) : dmRooms.push(room));
 
     return (
-        <aside className="Sidebar" style={styles.sidebar}>
+        <aside className={`Sidebar ${css(styles.sidebar)}`}>
             <UserInfo
                 signOut={signOut}
                 user={user} />
-            <h1 style={styles.h1}>babble </h1>
-            <RoomList rooms={rooms} users={users}/>
+            <h1 className={css(styles.h1)}>babble </h1>
+            <nav className={`RoomList ${css(styles.roomList)}`}>
+                <RoomList
+                    rooms={publicRooms}
+                    users={users} />
+                <DmList
+                    rooms={dmRooms}
+                    users={users} />
+            </nav>
         </aside>
     )
 }
 
-const styles = {
+const styles = StyleSheet.create({
     sidebar: {
         backgroundColor: '#333344',
         color: 'rgba(255, 255, 255, 0.8)',
@@ -25,6 +37,10 @@ const styles = {
         flexDirection: 'column'
     },
 
+    roomList: {
+        padding: '0 1rem'
+    },
+
     h1: {
         color: 'white',
         fontSize: '1.2rem',
@@ -32,7 +48,7 @@ const styles = {
         padding: '0 1rem'
     }
 
-}
+})
 
 
 export default Sidebar;
