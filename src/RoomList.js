@@ -4,7 +4,7 @@ import { StyleSheet, css } from 'aphrodite';
 
 import RoomLink from './RoomLink';
 
-const RoomList = ({ rooms, setCurrentRoom }) => {
+const RoomList = ({ rooms}) => {
     return (
         <nav className={`RoomList ${css(styles.roomList)}`}>
             <div className={css(styles.heading)}>
@@ -21,7 +21,6 @@ const RoomList = ({ rooms, setCurrentRoom }) => {
                         isPublic={room.isPublic}
                         key={room.name}
                         roomName={room.name}
-                        setCurrentRoom={setCurrentRoom}
                     />
                     )
                 }
@@ -39,7 +38,6 @@ const RoomList = ({ rooms, setCurrentRoom }) => {
                         isPublic={room.isPublic}
                         key={room.name}
                         roomName={room.name}
-                        setCurrentRoom={setCurrentRoom}
                     />
                     )
                 }
