@@ -32,7 +32,7 @@ const SidebarContent = ({ user, signOut, rooms, users, show }) => {
 const styles = StyleSheet.create({
     sidebar: {
         height: '100%',
-        backgroundColor: '#333344',
+        backgroundColor: 'rgb(111, 104, 101)',
         color: 'rgba(255, 255, 255, 0.8)',
         width: '15rem',
         padding: '1rem 0',

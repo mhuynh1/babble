@@ -126,9 +126,8 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        margin: '0 auto',
+        margin: '0 2rem',
         paddingBottom: '3rem',
-        width: '40rem',
     },
     form: {
         backgroundColor: 'white',
