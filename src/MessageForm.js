@@ -36,7 +36,7 @@ class MessageForm extends Component {
                     onChange={this.handleChange}
                 />
                 <button type="submit" className={css(styles.button)}>
-                    <i className="far fa-paper-plane" title="Send"></i>
+                    <i className="fa fa-paper-plane" title="Send"></i>
                 </button>
             </form>
         )
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     button: {
         fontSize: '1.5rem',
         backgroundColor: 'transparent',
-        color: '#ccc',
+        color: '#1A8FE3',
         paddingLeft: '1rem',
         paddingRight: '1rem',
         borderTopRightRadius: '0.5rem',
