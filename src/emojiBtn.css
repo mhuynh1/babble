@@ -1,0 +1,16 @@
+.Message:hover .fa-plus{
+    background-color: #f9f9f9 !important;
+}
+.emojiBtn{
+    display: none;
+}
+
+.Message:hover .emojiBtn{
+    transition: all .25s ease-out !important;
+    display: block;
+}
+
+.Message:hover .emojiBtn:hover{
+    cursor: pointer;
+    color: #198fe3 !important;
+}
