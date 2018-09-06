@@ -28,7 +28,6 @@ class RoomDmForm extends Component {
         room.users = selectedValue
 
         this.setState({ room })
-        console.log(selectedValue)
     }
 
     users = () => {
