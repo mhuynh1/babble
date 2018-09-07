@@ -1,24 +1,42 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, css } from 'aphrodite';
+import 'emoji-mart/css/emoji-mart.css'
+import { Picker } from 'emoji-mart';
 
 import './emojiBtn.css'
 import Avatar from './Avatar';
 import Metadata from './Metadata';
+class Message extends Component {
+    state = {
+        showEmojiPicker: false,
+    }
 
-const Message = ({ message }) => {
-    return (
-        <div className={`Message ${css(styles.message)}`}>
-            <Avatar user={message.user} />
-            <div className="details" style={styles.details}>
-                <Metadata message={message} />
-                <div className="body">{message.body}</div>
-                <button className={`emojiBtn ${css(styles.emojiBtn)}`}>
-                    <i className="far fa-smile"></i>
-                    <i className={`fa fa-plus ${css(styles.plusIcon)}`}></i>
-                </button>
+    showEmojiPicker = () => {
+        this.setState({ showEmojiPicker: true })
+    }
+
+    hideEmojiPicker = () => {
+        this.setState({ showEmojiPicker: false })
+    }
+
+    render() {
+        const { message } = this.props
+        return (
+            <div className={`Message ${css(styles.message)}`} onClick={this.state.showEmojiPicker ? this.hideEmojiPicker : null}>
+                <Avatar user={message.user} />
+                <div className="details" style={styles.details}>
+                    <Metadata message={message} />
+                    <div className="body">{message.body}</div>
+                    <button className={`emojiBtn ${css(styles.emojiBtn)}`} onClick={this.showEmojiPicker}>
+                        <i className="far fa-smile"></i>
+                        <i className={`fa fa-plus ${css(styles.plusIcon)}`}></i>
+                    </button>
+                </div>
+                {this.state.showEmojiPicker && <div className={`emojiPicker ${css(styles.emojiPicker)}`}><Picker set='emojione' showPreview={false} /></div>}
             </div>
-        </div>
-    )
+        )
+    }
+
 }
 
 const styles = StyleSheet.create({
@@ -56,7 +74,12 @@ const styles = StyleSheet.create({
         top: '-4px',
         padding: '1px 1px 1px 2px',
         borderRadius: '50%',
-
+    },
+    emojiPicker:{
+        position: 'absolute',
+        zIndex:1,
+        top: '5px',
+        right: '2rem',
     }
 })
 export default Message;
