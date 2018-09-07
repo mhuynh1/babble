@@ -51,6 +51,12 @@ class Chat extends Component {
         this.setState({ messages })
     }
 
+    updateMessage = (message) => {
+        const messages = {...this.state.messages}
+        messages[message.key] = message
+        this.setState({messages})
+    }
+
     render() {
         return (
             <div className="Chat" style={styles.chat}>
@@ -61,6 +67,7 @@ class Chat extends Component {
                     currentRoom={this.props.currentRoom}
                 />
                 <MessageList
+                    updateMessage={this.updateMessage}
                     user={this.props.user}
                     currentRoom={this.props.currentRoom}
                     messages={this.state.messages}

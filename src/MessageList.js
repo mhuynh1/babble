@@ -24,7 +24,7 @@ class MessageList extends Component {
                         : <p>{`This is the very beginning of the #${currentRoom.name} room.`}</p>
                     }
                 </div>
-                {messages.map(msg => (<Message user={user} key={msg.id} message={msg} />))}
+                {messages.map(msg => (<Message user={user} key={msg.id} message={msg} updateMessage={this.props.updateMessage}/>))}
                 <div ref={el => this.messagesEnd = el}></div>
             </div >
         )
