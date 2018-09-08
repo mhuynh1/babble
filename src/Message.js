@@ -35,8 +35,7 @@ class Message extends Component {
             }
         }
         */
-        // const msgCopy = { ...message }
-        // const { reactions } = msgCopy || {}
+       
 
         const msgCopy = { ...message }
         const reactions = { ...message.reactions } || {}
