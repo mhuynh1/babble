@@ -20,7 +20,7 @@ class Message extends Component {
         this.setState({ showEmojiPicker: false })
     }
 
-    handleSelectEmoji = message => emoji => {
+    handleEmojiClick = (message, user, emojiName) => emoji => {
         /*
         message: {
             id: '',
@@ -35,22 +35,35 @@ class Message extends Component {
             }
         }
         */
-        if (!message.reactions) {
-            message.reactions = { [emoji.colons]: { [message.user.uid]: message.user.displayName } }
+        // const msgCopy = { ...message }
+        // const { reactions } = msgCopy || {}
+
+        const msgCopy = { ...message }
+        const reactions = { ...message.reactions } || {}
+        msgCopy.reactions = reactions
+
+        const eName = emoji.colons || emojiName
+
+        if (!reactions[eName]) {
+            reactions[eName] = { [user.uid]: user.displayName }
         } else {
-            message.reactions[emoji.colons] = { [message.user.uid]: message.user.displayName }
+            //if user has already added this reaction, remove their reaction and decrement count
+            if (reactions[eName][user.uid]) {
+                reactions[eName][user.uid] = null
+            } else {
+                reactions[eName][user.uid] = user.displayName
+            }
         }
 
-        this.props.updateMessage(message)
+        this.props.updateMessage(msgCopy)
     }
 
-
     render() {
-        const { message } = this.props
+        const { message, user } = this.props
 
         const emojiList = message.reactions ?
             Object.keys(message.reactions).map(r => {
-                return <li key={r} className={`emoji ${css(styles.li)}`}>
+                return <li key={r} className={`emoji ${css(styles.li)}`} onClick={this.handleEmojiClick(message, user, r)}>
                     <Emoji emoji={r} size={14} />
                     <span className={`count ${css(styles.count)}`}>{Object.keys(message.reactions[r]).length}</span>
                 </li>
@@ -75,8 +88,9 @@ class Message extends Component {
                     <div className={`emojiPicker ${css(styles.emojiPicker)}`}>
                         <Picker
                             set='emojione'
+                            size={14}
                             showPreview={false}
-                            onSelect={this.handleSelectEmoji(message)}
+                            onSelect={this.handleEmojiClick(message, user)}
                         />
                     </div>
                 }
@@ -142,7 +156,11 @@ const styles = StyleSheet.create({
         listStyle: 'none',
         marginRight: '5px',
         border: '1px solid #03A9F4',
-        borderRadius: '4px'
+        borderRadius: '4px',
+
+        ':hover': {
+            cursor: 'pointer'
+        }
 
     },
     count: {
