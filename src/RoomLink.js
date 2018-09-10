@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { StyleSheet, css } from 'aphrodite';
+import Notifications from './Notifications';
 
 const RoomLink = ({ roomName, isPublic }) => {
     return (
@@ -11,12 +12,15 @@ const RoomLink = ({ roomName, isPublic }) => {
             >
                 {roomName}
             </NavLink>
+            <Notifications/>
         </li>
     )
 }
 
 const styles = StyleSheet.create({
     item: {
+        display: 'flex',
+        justifyContent: 'space-between',
         marginBottom: '0.5rem'
     },
     link: {

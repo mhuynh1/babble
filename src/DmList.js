@@ -9,7 +9,9 @@ const DmList = ({ rooms }) => {
             <div className={css(styles.heading)}>
                 <h2 className={css(styles.h2)}>Direct Message</h2>
                 <Link to="/new-direct-message" className={css(styles.button)}>
-                    <i className="fa fa-plus-circle" title="add room"></i>
+                    <span className={css(styles.span)}>
+                        <i className="fa fa-plus-circle" title="add room"></i>
+                    </span>
                 </Link>
             </div>
             <ul className={css(styles.list)}>
@@ -29,6 +31,9 @@ const DmList = ({ rooms }) => {
 const styles = StyleSheet.create({
     h2: {
         fontSize: '1rem',
+    },
+    span: {
+        padding: '0px 4px',
     },
 
     list: {
