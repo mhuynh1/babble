@@ -49,8 +49,10 @@ const styles = StyleSheet.create({
         height: '3rem',
         display: 'flex',
         alignItems: 'stretch',
-        borderTop: '2px solid #ccc',
+        border: '2px solid #6f6865',
+        borderRadius: '6px',
         padding: '2px',
+        margin: '1rem'
     },
     chatIcon: {
         display: 'flex',

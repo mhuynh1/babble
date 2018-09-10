@@ -86,6 +86,6 @@ const styles = StyleSheet.create({
         },
     },
     textInput: {
-        width: '20rem',
+        maxWidth: 'calc(100% - 1rem)',
     },
 })

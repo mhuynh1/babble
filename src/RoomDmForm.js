@@ -84,7 +84,7 @@ class RoomDmForm extends Component {
                                 className={`Select-control ${css(styles.input)}`}
                                 options={this.users()}
                                 value={this.state.room.users}
-                                onChange={this.handleSelectChange}
+                                handleSelectChange={this.handleSelectChange}
                                 placeholder='add members'
                             />)
                         }
@@ -129,6 +129,7 @@ const styles = StyleSheet.create({
         paddingBottom: '3rem',
     },
     form: {
+        maxWidth: '800px',
         backgroundColor: 'white',
         boxShadow: '0 1px 1px rgba(0,0,0,.1)',
         marginBottom: '2rem',
