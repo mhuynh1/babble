@@ -3,7 +3,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import { StyleSheet, css } from 'aphrodite';
 
 import base from './base'
-import SidebarContent from './SidebarContent'
+import SidedrawerContent from './SidedrawerContent'
 import Chat from './Chat'
 import RoomDmForm from './RoomDmForm';
 import Backdrop from './Backdrop';
@@ -127,7 +127,7 @@ class Main extends Component {
                     <Route path="/:roomtype/:roomName"
                         render={routerProps => (
                             <Fragment>
-                                <SidebarContent
+                                <SidedrawerContent
                                     {...routerProps}
                                     currentRoom={this.state.currentRoom.name}
                                     show={this.state.sideDrawerOpen}

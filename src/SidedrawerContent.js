@@ -5,13 +5,14 @@ import UserInfo from './UserInfo';
 import RoomList from './RoomList';
 import DmList from './DmList';
 import './SidedrawerContent.css';
-const SidebarContent = ({ user, signOut, rooms, users, show, currentRoom }) => {
+
+const SidedrawerContent = ({ user, signOut, rooms, users, show, currentRoom }) => {
     const publicRooms = [];
     const dmRooms = [];
     rooms.forEach(room => room.isPublic ? publicRooms.push(room) : dmRooms.push(room));
 
     return (
-        <aside className={`Sidebar ${css(styles.sidebar)} ${show ? `sidedrawer open` : `sidedrawer`}`}>
+        <aside className={`Sidedrawer ${css(styles.sidedrawer)} ${show ? `sidedrawer open` : `sidedrawer`}`}>
             <UserInfo
                 signOut={signOut}
                 user={user}
@@ -34,7 +35,7 @@ const SidebarContent = ({ user, signOut, rooms, users, show, currentRoom }) => {
 }
 
 const styles = StyleSheet.create({
-    sidebar: {
+    sidedrawer: {
         zIndex: 3,
         backgroundColor: 'rgb(111, 104, 101)',
         color: 'rgba(255, 255, 255, 0.8)',
@@ -44,6 +45,10 @@ const styles = StyleSheet.create({
         position: 'fixed',
         transform: 'translateX(-100%)',
         transition: 'transform 0.3s ease-out',
+
+        '@media (max-width:767px)': {
+            height: '100%',
+        },
 
         '@media (min-width:768px)': {
             display: 'flex',
@@ -61,4 +66,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default SidebarContent;
+export default SidedrawerContent;

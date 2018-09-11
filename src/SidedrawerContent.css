@@ -2,4 +2,5 @@
     transform: translateX(0) !important;
     z-index: 2;
     left: 0px !important;
+    height: 100%;
 }
