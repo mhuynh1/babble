@@ -11,11 +11,16 @@ class Chat extends Component {
 
     componentDidMount() {
         this.getLatestMessages()
+        if (this.props.currentRoom.name) {
+            this.resetNotificationCount(this.props.currentRoom.name, this.props.user.uid)
+        }
+
     }
 
     componentDidUpdate(prevProps) {
         if (prevProps.currentRoom.name !== this.props.currentRoom.name) {
             this.getLatestMessages()
+            this.resetNotificationCount(prevProps.currentRoom.name, this.props.user.uid)
         }
     }
 
@@ -47,14 +52,50 @@ class Chat extends Component {
         const user = this.props.user
 
         messages.push({ id: `${user.uid}-${Date.now()}`, user, body, createdAt: Date.now() })
+        this.setState({ messages }, this.getRoomNotificationCounts)
+    }
 
-        this.setState({ messages })
+    updateNotificationCounts = (membersCounts) => {
+        const url = this.props.currentRoom.name
+
+        Object.keys(membersCounts).forEach(uid => {
+            let count = membersCounts[uid] + 1
+
+
+            base.update(`notifications/${url}`, {
+                data: { [uid]: count },
+                then(err) {
+                    if (err) console.log(err)
+                }
+            })
+        })
+    }
+
+    getRoomNotificationCounts = () => {
+        base.fetch(`notifications/${this.props.currentRoom.name}`, {
+
+            context: this,
+            then(data) {
+
+                delete data[this.props.user.uid]
+                this.updateNotificationCounts(data)
+            }
+        })
+    }
+
+    resetNotificationCount = (roomName, uid) => {
+        base.update(`notifications/${roomName}`, {
+            data: { [uid]: 0 },
+            then(err) {
+                if (err) console.log(err)
+            }
+        })
     }
 
     updateEmojiCount = (message) => {
-        const messages = {...this.state.messages}
+        const messages = { ...this.state.messages }
         messages[message.key] = message
-        this.setState({messages})
+        this.setState({ messages })
     }
 
     render() {
