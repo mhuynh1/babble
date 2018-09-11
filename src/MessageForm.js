@@ -46,13 +46,13 @@ class MessageForm extends Component {
 const styles = StyleSheet.create({
     messageForm: {
         backgroundColor: 'white',
-        height: '3rem',
+        height: '2.5rem',
         display: 'flex',
         alignItems: 'stretch',
         border: '2px solid #6f6865',
         borderRadius: '6px',
-        padding: '2px',
-        margin: '1rem'
+        padding: '0 2px 2px',
+        margin: '0 1rem 1rem'
     },
     chatIcon: {
         display: 'flex',
