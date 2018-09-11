@@ -17,7 +17,7 @@ class MessageList extends Component {
         const { messages, user, currentRoom } = this.props
         return (
             <div className="MessageList" style={styles.messageList} >
-                <div className="roomAnnouncement" style={styles.roomAnnouncement}>
+                <div className="roomAnnouncement">
                     <h3 style={styles.h3}>#{currentRoom.name}</h3>
                     {currentRoom.isDm
                         ? <p>This is the very beginning of the direct message.</p>
@@ -35,14 +35,12 @@ const styles = {
     messageList: {
         backgroundColor: 'white',
         flex: 1,
-        paddingBottom: '1rem',
+        padding: '1rem',
         overflowY: 'scroll',
-    },
-    roomAnnouncement: {
-        padding: '2rem 1rem',
     },
     h3: {
         fontSize: '1.5rem',
+        margin: 0,
     }
 }
 export default MessageList;

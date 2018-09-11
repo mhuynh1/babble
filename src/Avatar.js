@@ -8,7 +8,7 @@ const Avatar = ({user}) => {
 
 const styles = {
     height: '40px',
-    width: '40px',
+    minWidth: '40px',
     fontSize: '1rem',
     borderRadius: '20px',
     marginRight: '0.5rem',

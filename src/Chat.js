@@ -72,7 +72,11 @@ class Chat extends Component {
     }
 
     getRoomNotificationCounts = () => {
-        base.fetch(`notifications/${this.props.currentRoom.name}`, {
+        debugger
+        //dm rooms don't get badge updates bc url string has a space
+        const url = this.props.currentRoom.name
+
+        base.fetch(`notifications/${url}`, {
 
             context: this,
             then(data) {
@@ -125,7 +129,6 @@ const styles = {
         display: 'flex',
         flexDirection: 'column',
         flex: '1',
-        height: '100vh'
     }
 
 }

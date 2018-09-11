@@ -17,7 +17,7 @@ const SidebarContent = ({ user, signOut, rooms, users, show, currentRoom }) => {
                 user={user}
             />
             <h1 className={css(styles.h1)}>babble </h1>
-            <nav className={`RoomList ${css(styles.roomList)}`}>
+            <nav className='RoomList'>
                 <RoomList
                     rooms={publicRooms}
                     currentRoom={currentRoom}
@@ -35,12 +35,11 @@ const SidebarContent = ({ user, signOut, rooms, users, show, currentRoom }) => {
 
 const styles = StyleSheet.create({
     sidebar: {
-        height: '100%',
         zIndex: 3,
         backgroundColor: 'rgb(111, 104, 101)',
         color: 'rgba(255, 255, 255, 0.8)',
         width: '15rem',
-        padding: '1rem 0',
+        padding: '1rem',
         flexDirection: 'column',
         position: 'fixed',
         transform: 'translateX(-100%)',
@@ -53,15 +52,10 @@ const styles = StyleSheet.create({
         }
     },
 
-    roomList: {
-        padding: '0 1rem'
-    },
-
     h1: {
         color: 'white',
         fontSize: '1.2rem',
         marginTop: 0,
-        padding: '0 1rem'
     }
 
 })

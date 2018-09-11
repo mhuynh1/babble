@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     message: {
         display: 'flex',
         marginTop: '1rem',
-        padding: '.5rem 1rem',
+        padding: '.5rem 0',
         position: 'relative',
 
         ':hover': {
