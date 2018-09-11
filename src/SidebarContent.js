@@ -5,7 +5,7 @@ import UserInfo from './UserInfo';
 import RoomList from './RoomList';
 import DmList from './DmList';
 import './SidedrawerContent.css';
-const SidebarContent = ({ user, signOut, rooms, users, show }) => {
+const SidebarContent = ({ user, signOut, rooms, users, show, currentRoom }) => {
     const publicRooms = [];
     const dmRooms = [];
     rooms.forEach(room => room.isPublic ? publicRooms.push(room) : dmRooms.push(room));
@@ -14,15 +14,19 @@ const SidebarContent = ({ user, signOut, rooms, users, show }) => {
         <aside className={`Sidebar ${css(styles.sidebar)} ${show ? `sidedrawer open` : `sidedrawer`}`}>
             <UserInfo
                 signOut={signOut}
-                user={user} 
+                user={user}
             />
             <h1 className={css(styles.h1)}>babble </h1>
             <nav className={`RoomList ${css(styles.roomList)}`}>
                 <RoomList
                     rooms={publicRooms}
+                    currentRoom={currentRoom}
+                    user={user}
                     users={users} />
                 <DmList
                     rooms={dmRooms}
+                    currentRoom={currentRoom}
+                    user={user}
                     users={users} />
             </nav>
         </aside>

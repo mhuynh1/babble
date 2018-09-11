@@ -115,6 +115,7 @@ class Main extends Component {
         this.setState({ sideDrawerOpen: false })
     )
 
+
     render() {
         return (
             <div className={`Main ${css(styles.main)}`}>
@@ -126,9 +127,11 @@ class Main extends Component {
                         render={routerProps => (<RoomDmForm user={this.props.user} users={this.props.users} addRoom={this.addRoom} {...routerProps} />)}
                     />
                     <Route path="/:roomtype/:roomName"
-                        render={() => (
+                        render={routerProps => (
                             <Fragment>
                                 <SidebarContent
+                                    {...routerProps}
+                                    currentRoom={this.state.currentRoom.name}
                                     show={this.state.sideDrawerOpen}
                                     rooms={this.filteredRooms()}
                                     // rooms={this.state.rooms}
@@ -136,9 +139,14 @@ class Main extends Component {
                                     users={this.props.users}
                                     user={this.props.user}
                                 />
-                                {this.state.sideDrawerOpen && <Backdrop handleBackdropClick={this.handleBackdropClick} />}
+
+                                {
+                                    this.state.sideDrawerOpen
+                                    && <Backdrop handleBackdropClick={this.handleBackdropClick} />
+                                }
 
                                 <Chat
+                                    
                                     handleToggleDrawer={this.handleToggleDrawer}
                                     removeRoom={this.removeRoom}
                                     user={this.props.user}

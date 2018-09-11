@@ -1,11 +1,39 @@
 import React, { Component } from 'react'
 
+import base from './base'
 class Notifications extends Component {
-    state = {}
+    state = {
+        notifications: '',
+    }
+
+    // notifications
+    //     roomName:{
+    //         uid: 'unreadNum',
+    //         uid2: 'unreadNum',
+    //         uid3: 'unreadNum',
+    //         uid4: 'unreadNum',
+    //         uid5: 'unreadNum',
+    //         uid6: 'unreadNum',
+    //     },
+    //     roomName2:{
+    //         uid: 'unreadNum',
+    //         uid2: 'unreadNum'
+    //     }     
+
+    componentDidMount() {
+      
+
+        base.listenTo(`messages/${this.props.roomName}`, {
+            context: this,
+            then(data){
+                this.setState({notifications: data.length});
+            }
+        })
+    }
 
     render() {
         return (
-            <span className="Notifications" style={styles.span}>5</span>
+            <span className="Notifications" style={styles.span}>{this.state.notifications}</span>
         )
     }
 }
