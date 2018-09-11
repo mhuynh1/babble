@@ -51,7 +51,7 @@ class Chat extends Component {
         this.setState({ messages })
     }
 
-    updateMessage = (message) => {
+    updateEmojiCount = (message) => {
         const messages = {...this.state.messages}
         messages[message.key] = message
         this.setState({messages})
@@ -67,7 +67,7 @@ class Chat extends Component {
                     currentRoom={this.props.currentRoom}
                 />
                 <MessageList
-                    updateMessage={this.updateMessage}
+                    updateEmojiCount={this.updateEmojiCount}
                     user={this.props.user}
                     currentRoom={this.props.currentRoom}
                     messages={this.state.messages}

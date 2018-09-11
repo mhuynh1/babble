@@ -53,8 +53,7 @@ class Message extends Component {
                 reactions[eName][user.uid] = user.displayName
             }
         }
-
-        this.props.updateMessage(msgCopy)
+        this.props.updateEmojiCount(msgCopy)
     }
 
     render() {
