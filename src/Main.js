@@ -64,14 +64,12 @@ class Main extends Component {
         const rooms = { ...this.state.rooms }
         const { user } = this.props
 
-        if (!room.isPublic) {
+        if (room.isDm) {
             room.users.push({
                 label: `${user.displayName} (${user.email})`,
                 value: user.uid
             })
-        }
 
-        if (room.isDm) {
             room.name = room.users.map(u => u.label.split(' ')).map(n => n[0]).join(', ')
         }
 
