@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { StyleSheet, css } from 'aphrodite';
-import Notifications from './Notifications';
+import NotificationsBadge from './NotificationsBadge';
 
 const RoomLink = ({ roomName, isPublic, user, currentRoom }) => {
     return (
@@ -11,7 +11,7 @@ const RoomLink = ({ roomName, isPublic, user, currentRoom }) => {
         >
             <li className={`${css(styles.item)}`}>
                 {roomName}
-                {roomName !== currentRoom && <Notifications currentRoom={currentRoom} user={user} roomName={roomName} />}
+                {roomName !== currentRoom && <NotificationsBadge currentRoom={currentRoom} user={user} roomName={roomName} />}
             </li>
         </NavLink>
     )

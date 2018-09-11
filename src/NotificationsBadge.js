@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import base from './base'
-class Notifications extends Component {
+class NotificationsBadge extends Component {
     state = {
         notifications: '',
     }
@@ -56,4 +56,4 @@ const styles = {
         right: '1rem',
     }
 }
-export default Notifications;
+export default NotificationsBadge;
