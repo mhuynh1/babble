@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import ChatHeader from './ChatHeader'
 import MessageList from './MessageList'
@@ -72,7 +73,6 @@ class Chat extends Component {
     }
 
     getRoomNotificationCounts = () => {
-        debugger
         //dm rooms don't get badge updates bc url string has a space
         const url = this.props.currentRoom.name
 
@@ -109,12 +109,10 @@ class Chat extends Component {
                     handleToggleDrawer={this.props.handleToggleDrawer}
                     removeRoom={this.props.removeRoom}
                     removeMessages={this.removeMessages}
-                    currentRoom={this.props.currentRoom}
                 />
                 <MessageList
                     updateEmojiCount={this.updateEmojiCount}
                     user={this.props.user}
-                    currentRoom={this.props.currentRoom}
                     messages={this.state.messages}
                 />
                 <MessageForm
@@ -132,4 +130,8 @@ const styles = {
     }
 
 }
-export default Chat;
+
+const mapStateToProps = state => {
+    return { currentRoom: state.currentRoom }
+}
+export default connect(mapStateToProps)(Chat);

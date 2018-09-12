@@ -6,22 +6,6 @@ class NotificationsBadge extends Component {
         notifications: '',
     }
 
-    /*
-    notifications
-        roomName:{
-            uid: 'unreadNum',
-            uid2: 'unreadNum',
-            uid3: 'unreadNum',
-            uid4: 'unreadNum',
-            uid5: 'unreadNum',
-            uid6: 'unreadNum',
-        },
-        roomName2:{
-            uid: 'unreadNum',
-            uid2: 'unreadNum'
-        } 
-    */
-
     componentDidMount() {
         this.getLatestNotificationsCounts()
     }

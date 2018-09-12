@@ -1,6 +1,12 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
+import { connect } from 'react-redux';
+
 import SidedrawerToggle from './SidedrawerToggle';
+
+const mapStateToProps = state => {
+    return { currentRoom: state.currentRoom }
+}
 
 const ChatHeader = ({ currentRoom, removeMessages, handleToggleDrawer }) => {
 
@@ -64,4 +70,5 @@ const styles = StyleSheet.create({
 
 })
 
-export default ChatHeader;
+
+export default connect(mapStateToProps)(ChatHeader);

@@ -1,7 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { StyleSheet, css } from 'aphrodite';
+import { connect } from 'react-redux';
 
+import { addCurrentRoom } from './redux/actions'
 import base from './base'
 import SidedrawerContent from './SidedrawerContent'
 import Chat from './Chat'
@@ -10,7 +12,6 @@ import Backdrop from './Backdrop';
 
 class Main extends Component {
     state = {
-        currentRoom: {},
         rooms: {},
         sideDrawerOpen: false
     }
@@ -48,7 +49,7 @@ class Main extends Component {
         const currentRoom = this.filteredRooms().find(room => room.name === roomName)
 
         if (currentRoom) {
-            this.setState({ currentRoom })
+            this.props.addCurrentRoom({ currentRoom })
         } else {
             this.loadValidRoom()
         }
@@ -129,7 +130,6 @@ class Main extends Component {
                             <Fragment>
                                 <SidedrawerContent
                                     {...routerProps}
-                                    currentRoom={this.state.currentRoom.name}
                                     show={this.state.sideDrawerOpen}
                                     rooms={this.filteredRooms()}
                                     // rooms={this.state.rooms}
@@ -144,11 +144,9 @@ class Main extends Component {
                                 }
 
                                 <Chat
-                                    
                                     handleToggleDrawer={this.handleToggleDrawer}
                                     removeRoom={this.removeRoom}
                                     user={this.props.user}
-                                    currentRoom={this.state.currentRoom}
                                 />
                             </Fragment>
                         )} />
@@ -170,4 +168,12 @@ const styles = StyleSheet.create({
         }
     }
 })
-export default Main;
+
+const mapStateToProps = state => {
+    return { currentRoom: state.currentRoom }
+}
+
+const mapDispatchToProps = dispatch => {
+    return { addCurrentRoom: currentRoom => dispatch(addCurrentRoom(currentRoom)) }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

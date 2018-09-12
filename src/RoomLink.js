@@ -1,17 +1,19 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { StyleSheet, css } from 'aphrodite';
 import NotificationsBadge from './NotificationsBadge';
+
 
 const RoomLink = ({ roomName, isPublic, user, currentRoom }) => {
     return (
         <NavLink
             to={isPublic ? `/rooms/${roomName}` : `/dm/${roomName}`}
-            className={`${css(styles.link)} ${currentRoom === roomName && css(styles.activeRoom)}`}
+            className={`${css(styles.link)} ${currentRoom.name === roomName && css(styles.activeRoom)}`}
         >
             <li className={`${css(styles.item)}`}>
                 {roomName}
-                {roomName !== currentRoom && <NotificationsBadge currentRoom={currentRoom} user={user} roomName={roomName} />}
+                {roomName !== currentRoom.name && <NotificationsBadge user={user} roomName={roomName} />}
             </li>
         </NavLink>
     )
@@ -45,4 +47,9 @@ const styles = StyleSheet.create({
     },
 
 })
-export default RoomLink;
+
+const mapStateToProps = state => {
+    return { currentRoom: state.currentRoom }
+}
+
+export default connect(mapStateToProps)(RoomLink);

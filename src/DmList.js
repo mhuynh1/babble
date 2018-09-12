@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { StyleSheet, css } from 'aphrodite';
 
 import RoomLink from './RoomLink'
-const DmList = ({ rooms, user, currentRoom }) => {
+const DmList = ({ rooms, user }) => {
     return (
         <Fragment>
             <div className={css(styles.heading)}>
@@ -19,7 +19,6 @@ const DmList = ({ rooms, user, currentRoom }) => {
                     rooms.map(
                         room => !room.isPublic && <RoomLink
                             user={user}
-                            currentRoom={currentRoom}
                             isPublic={room.isPublic}
                             key={room.name}
                             roomName={room.name}
