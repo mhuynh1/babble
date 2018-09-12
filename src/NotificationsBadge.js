@@ -23,21 +23,33 @@ class NotificationsBadge extends Component {
     */
 
     componentDidMount() {
-        base.syncState(`notifications/${this.props.roomName}/${this.props.user.uid}`, {
+        this.getLatestNotificationsCounts()
+    }
+
+    componentDidUpdate(_prevProps, prevState) {
+        if(prevState.notifications[this.props.user.uid] !== this.state.notifications[this.props.user.uid]){
+            this.getLatestNotificationsCounts()
+        }
+    }
+
+    getLatestNotificationsCounts = () => {
+        if (this.notificationsRef) {
+            base.removeBinding(this.notificationsRef)
+        }
+
+        this.notificationsRef = base.syncState(`notifications/${this.props.roomName}`, {
             context: this,
             state: 'notifications',
         })
-
     }
 
-
     render() {
-        const count = this.state.notifications
+        const count = this.state.notifications[this.props.user.uid]
         return (
             <React.Fragment>
                 {
                     count > 0
-                        ? <span className="Notifications" style={styles.span}>{this.state.notifications}</span>
+                        ? <span className="Notifications" style={styles.span}>{count}</span>
                         : null
                 }
             </React.Fragment>
