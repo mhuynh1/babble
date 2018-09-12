@@ -4,7 +4,6 @@ const initialState = {
 };
 
 export const rootReducer = (state = initialState, action) => {
-    debugger
     switch (action.type) {
         case "SAVE_USER":
         return {...state, user: [...state.user, action.user] };
