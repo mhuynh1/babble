@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
+import { setUser } from './redux/actions'
 import './App.css';
 import Main from './Main';
 import SignIn from './SignIn';
@@ -9,10 +11,8 @@ import base, { auth } from './base'
 class App extends Component {
   constructor() {
     super()
-    const user = JSON.parse(localStorage.getItem('user'))
-
+  
     this.state = {
-      user: user || {},
       users: {}
     }
   }
@@ -42,35 +42,37 @@ class App extends Component {
       email: oAuthUser.email,
       photoUrl: oAuthUser.photoURL
     }
-
+    
     //add or update users list
     const users = { ...this.state.users }
     users[user.uid] = user
-
-    this.setState({ user, users })
+    
+    this.props.setUser(user)
+    this.setState({ users })
     localStorage.setItem('user', JSON.stringify(user))
   }
 
   afterSignOut = () => {
-    this.setState({ user: {} })
+    this.props.setUser({ user: {} })
     localStorage.removeItem('user')
   }
 
   signedIn = () => {
     //truthy/falsey check for user if they are signed in
     //return undefined if they are not 'signed-in'
-    return this.state.user.uid
+    return this.props.user.uid
   }
 
   signOut = () => {
     auth.signOut();
   }
   render() {
+
     const mainProps = {
-      user: this.state.user,
       users: this.state.users,
       signOut: this.signOut,
     }
+
     return (
       <div className="App">
         <Switch>
@@ -113,4 +115,18 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    setUser: (user) => {
+      dispatch(setUser(user))
+    }
+  }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
