@@ -3,10 +3,6 @@ import { connect } from 'react-redux';
 
 import Message from './Message'
 
-const mapStateToProps = state => {
-    return { currentRoom: state.currentRoom }
-}
-
 class MessageList extends Component {
 
     componentDidUpdate(prevProps) {
@@ -20,7 +16,7 @@ class MessageList extends Component {
     }
 
     render() {
-        const { messages, user, currentRoom } = this.props
+        const { messages, currentRoom , updateEmojiCount} = this.props
         return (
             <div className="MessageList" style={styles.messageList} >
                 <div className="roomAnnouncement">
@@ -30,7 +26,7 @@ class MessageList extends Component {
                         : <p>{`This is the very beginning of the #${currentRoom.name} room.`}</p>
                     }
                 </div>
-                {messages.map(msg => (<Message user={user} key={msg.id} message={msg} updateEmojiCount={this.props.updateEmojiCount} />))}
+                {messages.map(msg => (<Message key={msg.id} message={msg} updateEmojiCount={updateEmojiCount} />))}
                 <div ref={el => this.messagesEnd = el}></div>
             </div >
         )
@@ -49,4 +45,9 @@ const styles = {
         margin: 0,
     }
 }
+
+const mapStateToProps = state => {
+    return { currentRoom: state.currentRoom }
+}
+
 export default connect(mapStateToProps)(MessageList);

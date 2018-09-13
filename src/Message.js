@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import 'emoji-mart/css/emoji-mart.css'
 import { Picker, Emoji } from 'emoji-mart';
+import { connect } from 'react-redux';
 
-import './emojiBtn.css'
+import './emojiBtn.css';
 import Avatar from './Avatar';
 import Metadata from './Metadata';
 class Message extends Component {
@@ -21,22 +22,6 @@ class Message extends Component {
     }
 
     handleEmojiClick = (message, user, emojiName) => emoji => {
-        /*
-        message: {
-            id: '',
-            body: '',
-            reactions: {
-                ':smileyFace:' : {
-                    uid#1: 'dudley canbers'
-                    uid#2: 'john mitchell'
-                },
-                ':kissyFace: {
-                    uid#0: 'Amy Adams'
-            }
-        }
-        */
-       
-
         const msgCopy = { ...message }
         const reactions = { ...message.reactions } || {}
         msgCopy.reactions = reactions
@@ -169,4 +154,11 @@ const styles = StyleSheet.create({
     }
 
 })
-export default Message;
+
+
+const mapStateToProps = state => {
+    return {
+        user: state.user,
+    }
+}
+export default connect(mapStateToProps)(Message);

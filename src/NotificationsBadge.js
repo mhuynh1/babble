@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-import base from './base'
+import base from './base';
 class NotificationsBadge extends Component {
     state = {
         notifications: '',
@@ -11,7 +12,7 @@ class NotificationsBadge extends Component {
     }
 
     componentDidUpdate(_prevProps, prevState) {
-        if(prevState.notifications[this.props.user.uid] !== this.state.notifications[this.props.user.uid]){
+        if (prevState.notifications[this.props.user.uid] !== this.state.notifications[this.props.user.uid]) {
             this.getLatestNotificationsCounts()
         }
     }
@@ -52,4 +53,8 @@ const styles = {
         right: '1rem',
     }
 }
-export default NotificationsBadge;
+
+const mapStateToProps = state => {
+    return { user: state.user }
+}
+export default connect(mapStateToProps)(NotificationsBadge);

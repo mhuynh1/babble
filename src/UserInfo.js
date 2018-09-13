@@ -1,4 +1,6 @@
 import React from 'react';
+import {connect} from 'react-redux'
+
 import Avatar from './Avatar';
 import SignOutButton from './SignOutButton';
 
@@ -34,4 +36,10 @@ const styles = {
         overflow: 'hidden',
     }
 }
-export default UserInfo;
+const mapStateToProps = state => {
+    return {
+        user: state.user
+    }
+}
+
+export default connect(mapStateToProps)(UserInfo);

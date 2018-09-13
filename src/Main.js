@@ -120,10 +120,10 @@ class Main extends Component {
             <div className={`Main ${css(styles.main)}`}>
                 <Switch>
                     <Route path="/new-room"
-                        render={routerProps => (<RoomDmForm user={this.props.user} users={this.props.users} addRoom={this.addRoom} {...routerProps} />)}
+                        render={routerProps => (<RoomDmForm users={this.props.users} addRoom={this.addRoom} {...routerProps} />)}
                     />
                     <Route path="/new-direct-message"
-                        render={routerProps => (<RoomDmForm user={this.props.user} users={this.props.users} addRoom={this.addRoom} {...routerProps} />)}
+                        render={routerProps => (<RoomDmForm users={this.props.users} addRoom={this.addRoom} {...routerProps} />)}
                     />
                     <Route path="/:roomtype/:roomName"
                         render={routerProps => (
@@ -135,7 +135,6 @@ class Main extends Component {
                                     // rooms={this.state.rooms}
                                     signOut={this.props.signOut}
                                     users={this.props.users}
-                                    user={this.props.user}
                                 />
 
                                 {
@@ -146,7 +145,6 @@ class Main extends Component {
                                 <Chat
                                     handleToggleDrawer={this.handleToggleDrawer}
                                     removeRoom={this.removeRoom}
-                                    user={this.props.user}
                                 />
                             </Fragment>
                         )} />
@@ -170,7 +168,10 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = state => {
-    return { currentRoom: state.currentRoom }
+    return {
+        currentRoom: state.currentRoom,
+        user: state.user
+    }
 }
 
 const mapDispatchToProps = dispatch => {

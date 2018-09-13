@@ -6,7 +6,7 @@ import RoomList from './RoomList';
 import DmList from './DmList';
 import './SidedrawerContent.css';
 
-const SidedrawerContent = ({ user, signOut, rooms, users, show }) => {
+const SidedrawerContent = ({ signOut, rooms, users, show }) => {
     const publicRooms = [];
     const dmRooms = [];
     rooms.forEach(room => room.isPublic ? publicRooms.push(room) : dmRooms.push(room));
@@ -15,17 +15,14 @@ const SidedrawerContent = ({ user, signOut, rooms, users, show }) => {
         <aside className={`Sidedrawer ${css(styles.sidedrawer)} ${show ? `sidedrawer open` : `sidedrawer`}`}>
             <UserInfo
                 signOut={signOut}
-                user={user}
             />
             <h1 className={css(styles.h1)}>babble </h1>
             <nav className='RoomList'>
                 <RoomList
                     rooms={publicRooms}
-                    user={user}
                     users={users} />
                 <DmList
                     rooms={dmRooms}
-                    user={user}
                     users={users} />
             </nav>
         </aside>
@@ -62,8 +59,5 @@ const styles = StyleSheet.create({
     }
 
 })
-
-
-
 
 export default SidedrawerContent;

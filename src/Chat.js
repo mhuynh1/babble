@@ -112,7 +112,6 @@ class Chat extends Component {
                 />
                 <MessageList
                     updateEmojiCount={this.updateEmojiCount}
-                    user={this.props.user}
                     messages={this.state.messages}
                 />
                 <MessageForm
@@ -132,6 +131,9 @@ const styles = {
 }
 
 const mapStateToProps = state => {
-    return { currentRoom: state.currentRoom }
+    return { 
+        currentRoom: state.currentRoom,
+        user: state.user,
+    }
 }
 export default connect(mapStateToProps)(Chat);

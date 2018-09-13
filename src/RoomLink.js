@@ -5,7 +5,7 @@ import { StyleSheet, css } from 'aphrodite';
 import NotificationsBadge from './NotificationsBadge';
 
 
-const RoomLink = ({ roomName, isPublic, user, currentRoom }) => {
+const RoomLink = ({ roomName, isPublic, currentRoom }) => {
     return (
         <NavLink
             to={isPublic ? `/rooms/${roomName}` : `/dm/${roomName}`}
@@ -13,7 +13,7 @@ const RoomLink = ({ roomName, isPublic, user, currentRoom }) => {
         >
             <li className={`${css(styles.item)}`}>
                 {roomName}
-                {roomName !== currentRoom.name && <NotificationsBadge user={user} roomName={roomName} />}
+                {roomName !== currentRoom.name && <NotificationsBadge roomName={roomName} />}
             </li>
         </NavLink>
     )
@@ -49,7 +49,9 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = state => {
-    return { currentRoom: state.currentRoom }
+    return { 
+        currentRoom: state.currentRoom,
+    }
 }
 
 export default connect(mapStateToProps)(RoomLink);
