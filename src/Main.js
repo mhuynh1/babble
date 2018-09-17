@@ -24,6 +24,7 @@ class Main extends Component {
             defaultValue: {
                 general: {
                     name: 'general',
+                    isPublic: true,
                     description: 'a safe space for general topics'
                 }
             },
@@ -35,7 +36,9 @@ class Main extends Component {
 
     componentDidUpdate(prevProps) {
         const { roomName } = this.props.match.params
+        
         if (prevProps.match.params.roomName !== roomName) {
+            
             this.setRoomFromRoute()
         }
     }
@@ -66,10 +69,27 @@ class Main extends Component {
         const currentRoom = this.filteredRooms().find(room => room.name === roomName)
 
         if (currentRoom) {
+            this.setState({ currentRoom })
             this.props.addCurrentRoom({ currentRoom })
         } else {
             this.loadValidRoom()
         }
+    }
+
+    filteredRooms = () => {
+        return this.filteredRoomNames()
+            .map(roomName => this.state.rooms[roomName])
+    }
+
+    filteredRoomNames = () => {
+        //only show public rooms or rooms where user is in list
+        
+        return Object.keys(this.state.rooms)
+            .filter(roomName => {
+                const room = this.state.rooms[roomName]
+                if (!room) return false
+                return room.isPublic || this.isRoomMember(room)
+            })
     }
 
     loadValidRoom = () => {
@@ -134,21 +154,6 @@ class Main extends Component {
         rooms[room.name] = null
         notifications[room.name] = null
         this.setState({ rooms, notifications }, this.loadValidRoom)
-    }
-
-    filteredRooms = () => {
-        return this.filteredRoomNames()
-            .map(roomName => this.state.rooms[roomName])
-    }
-
-    filteredRoomNames = () => {
-        //only show public rooms or rooms where user is in list
-        return Object.keys(this.state.rooms)
-            .filter(roomName => {
-                const room = this.state.rooms[roomName]
-                if (!room) return false
-                return room.isPublic || this.isRoomMember(room)
-            })
     }
 
     isRoomMember = (room) => {
