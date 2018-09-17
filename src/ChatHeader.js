@@ -32,7 +32,7 @@ const ChatHeader = ({ currentRoom, removeMessages, handleToggleDrawer }) => {
 
 const styles = StyleSheet.create({
     chatHeader: {
-        backgroundColor: ' #f3f3f3',
+        backgroundColor: ' #fff',
         borderBottom: '1px solid #ccc',
         padding: '0.5rem 1rem',
         display: 'flex',
@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
     h2: {
         display: 'flex',
         fontSize: '1.1rem',
+        lineHeight: '1.4',
         margin: 0,
     },
     p: {
