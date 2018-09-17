@@ -130,9 +130,10 @@ class Main extends Component {
 
     removeRoom = room => {
         const rooms = { ...this.state.rooms }
+        const notifications = {...this.state.notifications}
         rooms[room.name] = null
-
-        this.setState({ rooms }, this.loadValidRoom)
+        notifications[room.name] = null
+        this.setState({ rooms, notifications }, this.loadValidRoom)
     }
 
     filteredRooms = () => {
@@ -194,6 +195,7 @@ class Main extends Component {
 
                                 <Chat
                                     handleToggleDrawer={this.handleToggleDrawer}
+                                    roomNames={this.filteredRoomNames()}
                                     removeRoom={this.removeRoom}
                                 />
                             </Fragment>

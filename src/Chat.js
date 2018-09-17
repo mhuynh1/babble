@@ -12,8 +12,10 @@ class Chat extends Component {
 
     componentDidMount() {
         this.getLatestMessages()
-        if (this.props.currentRoom.name) {
-            this.resetNotificationCount(this.props.currentRoom.name, this.props.user.uid)
+        const currentRoom = { ...this.props }
+        const rNames = this.props.roomNames || []
+        if (currentRoom.name && rNames.some(name => name === currentRoom.name)) {
+            this.resetNotificationCount(currentRoom.name, this.props.user.uid)
         }
 
     }
@@ -21,7 +23,10 @@ class Chat extends Component {
     componentDidUpdate(prevProps) {
         if (prevProps.currentRoom.name !== this.props.currentRoom.name) {
             this.getLatestMessages()
-            this.resetNotificationCount(prevProps.currentRoom.name, this.props.user.uid)
+            const rNames = this.props.roomNames || []
+            if (rNames.some(name => name === prevProps.currentRoom.name)) {
+                this.resetNotificationCount(prevProps.currentRoom.name, this.props.user.uid)
+            }
         }
     }
 
@@ -62,7 +67,6 @@ class Chat extends Component {
         Object.keys(membersCounts).forEach(uid => {
             let count = membersCounts[uid] + 1
 
-
             base.update(`notifications/${url}`, {
                 data: { [uid]: count },
                 then(err) {
@@ -78,7 +82,6 @@ class Chat extends Component {
         base.fetch(`notifications/${url}`, {
             context: this,
             then(data) {
-
                 delete data[this.props.user.uid]
                 this.updateNotificationCounts(data)
             }
@@ -129,7 +132,7 @@ const styles = {
 }
 
 const mapStateToProps = state => {
-    return { 
+    return {
         currentRoom: state.currentRoom,
         user: state.user,
     }
