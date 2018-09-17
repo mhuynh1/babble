@@ -12,7 +12,7 @@ const SidedrawerContent = ({ signOut, rooms, users, show, notifications }) => {
     rooms.forEach(room => room.isPublic ? publicRooms.push(room) : dmRooms.push(room));
 
     return (
-        <aside className={`Sidedrawer ${css(styles.sidedrawer)} ${show ? `sidedrawer open` : `sidedrawer`}`}>
+        <aside className={`Sidedrawer ${css(styles.sidedrawer)} sidedrawer ${show && `open`}`}>
             <UserInfo
                 signOut={signOut}
             />
