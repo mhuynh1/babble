@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, css } from 'aphrodite';
+import { connect } from 'react-redux';
+
 import { CancelButton, SubmitButton } from './FormButtons';
 import { NewRoomInputs, MultipleSelectInput } from './FormInputs';
 
@@ -34,7 +36,7 @@ class RoomDmForm extends Component {
         const { users } = this.props
         delete users[this.props.user.uid]
         return Object.keys(users).map(uid => {
-            const user = this.props.users[uid]
+            const user = users[uid]
             return {
                 value: uid,
                 label: `${user.displayName} (${user.email})`
@@ -147,4 +149,10 @@ const styles = StyleSheet.create({
     }
 })
 
-export default RoomDmForm;
+const mapStateToProps = state => {
+    return {
+        user: state.user
+    }
+}
+
+export default connect(mapStateToProps)(RoomDmForm);
