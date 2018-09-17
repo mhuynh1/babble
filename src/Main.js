@@ -13,7 +13,8 @@ import Backdrop from './Backdrop';
 class Main extends Component {
     state = {
         rooms: {},
-        sideDrawerOpen: false
+        sideDrawerOpen: false,
+        notifications: {}
     }
 
     componentDidMount() {
@@ -27,8 +28,9 @@ class Main extends Component {
                 }
             },
             then: this.setRoomFromRoute,
-
         })
+
+        this.syncNotificationsCounts()
     }
 
     componentDidUpdate(prevProps) {
@@ -36,6 +38,21 @@ class Main extends Component {
         if (prevProps.match.params.roomName !== roomName) {
             this.setRoomFromRoute()
         }
+    }
+
+    componentWillUnmount() {
+        base.removeBinding(this.notificationsRef)
+    }
+
+    syncNotificationsCounts = () => {
+        if (this.notificationsRef) {
+            base.removeBinding(this.notificationsRef)
+        }
+
+        this.notificationsRef = base.syncState(`notifications`, {
+            context: this,
+            state: 'notifications'
+        })
     }
 
     setRoomFromRoute = () => {
@@ -64,18 +81,51 @@ class Main extends Component {
     addRoom = room => {
         const rooms = { ...this.state.rooms }
         const { user } = this.props
-
-        if (room.isDm) {
+        if (!room.isPublic) {
             room.users.push({
                 label: `${user.displayName} (${user.email})`,
                 value: user.uid
             })
-
             room.name = room.users.map(u => u.label.split(' ')).map(n => n[0]).join(', ')
         }
-
         rooms[room.name] = room
-        this.setState({ rooms })
+        this.setState({ rooms }, this.setRoomNotificationsEndpoint(room))
+    }
+
+    setRoomNotificationsEndpoint = (room) => {
+        const notifications = { ...this.state.notifications }
+
+        notifications[room.name] = {}
+
+
+        if (!room.isPublic) {
+            room.users.forEach(u => {
+                notifications[room.name][u.value] = 0
+            })
+            this.setState({ notifications })
+        } else {
+            this.getAllUids(room.name)
+        }
+
+
+    }
+
+    getAllUids = (roomName) => {
+        base.fetch('users', {
+            context: this,
+            then(data) {
+                this.setAllNotifications(Object.keys(data), roomName)
+            }
+        })
+    }
+
+    setAllNotifications = (uids, roomName) => {
+        const notifications = { ...this.state.notifications }
+        notifications[roomName] = {}
+        uids.forEach(uid => {
+            notifications[roomName][uid] = 0
+        })
+        this.setState({ notifications })
     }
 
     removeRoom = room => {
@@ -132,7 +182,7 @@ class Main extends Component {
                                     {...routerProps}
                                     show={this.state.sideDrawerOpen}
                                     rooms={this.filteredRooms()}
-                                    // rooms={this.state.rooms}
+                                    notifications={this.state.notifications}
                                     signOut={this.props.signOut}
                                     users={this.props.users}
                                 />

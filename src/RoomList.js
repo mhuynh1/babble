@@ -4,7 +4,7 @@ import { StyleSheet, css } from 'aphrodite';
 
 import RoomLink from './RoomLink';
 
-const RoomList = ({ rooms }) => {
+const RoomList = ({ rooms, notifications }) => {
 
     return (
         <Fragment>
@@ -21,6 +21,7 @@ const RoomList = ({ rooms }) => {
                 {
                     rooms.map(
                         room => <RoomLink
+                            notifications={notifications[room.name]}
                             isPublic={room.isPublic}
                             key={room.name}
                             roomName={room.name}

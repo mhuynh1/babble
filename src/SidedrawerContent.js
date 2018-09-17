@@ -6,7 +6,7 @@ import RoomList from './RoomList';
 import DmList from './DmList';
 import './SidedrawerContent.css';
 
-const SidedrawerContent = ({ signOut, rooms, users, show }) => {
+const SidedrawerContent = ({ signOut, rooms, users, show, notifications }) => {
     const publicRooms = [];
     const dmRooms = [];
     rooms.forEach(room => room.isPublic ? publicRooms.push(room) : dmRooms.push(room));
@@ -19,9 +19,11 @@ const SidedrawerContent = ({ signOut, rooms, users, show }) => {
             <h1 className={css(styles.h1)}>babble </h1>
             <nav className='RoomList'>
                 <RoomList
+                    notifications={notifications}
                     rooms={publicRooms}
                     users={users} />
                 <DmList
+                    notifications={notifications}
                     rooms={dmRooms}
                     users={users} />
             </nav>

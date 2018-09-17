@@ -5,7 +5,9 @@ import { StyleSheet, css } from 'aphrodite';
 import NotificationsBadge from './NotificationsBadge';
 
 
-const RoomLink = ({ roomName, isPublic, currentRoom }) => {
+const RoomLink = ({ roomName, isPublic, currentRoom, notifications, user }) => {
+    let count;
+    if (notifications) count = notifications[user.uid]
     return (
         <NavLink
             to={isPublic ? `/rooms/${roomName}` : `/dm/${roomName}`}
@@ -13,7 +15,7 @@ const RoomLink = ({ roomName, isPublic, currentRoom }) => {
         >
             <li className={`${css(styles.item)}`}>
                 {roomName}
-                {roomName !== currentRoom.name && <NotificationsBadge roomName={roomName} />}
+                {roomName !== currentRoom.name && count > 0 && <NotificationsBadge count={count}/>}
             </li>
         </NavLink>
     )
@@ -51,6 +53,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => {
     return { 
         currentRoom: state.currentRoom,
+        user: state.user
     }
 }
 
