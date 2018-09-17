@@ -15,8 +15,15 @@ class MessageList extends Component {
         this.messagesEnd.scrollIntoView({ behavior: 'smooth' })
     }
 
+    getPrevMsgUid = (index) => {
+        const prevMsgUid = this.props.messages.length > 1
+            ? this.props.messages[index - 1].user.uid
+            : undefined
+        return prevMsgUid
+    }
+
     render() {
-        const { messages, currentRoom , updateEmojiCount} = this.props
+        const { messages, currentRoom, updateEmojiCount } = this.props
         return (
             <div className="MessageList" style={styles.messageList} >
                 <div className="roomAnnouncement">
@@ -26,7 +33,7 @@ class MessageList extends Component {
                         : <p>{`This is the very beginning of the #${currentRoom.name} room.`}</p>
                     }
                 </div>
-                {messages.map(msg => (<Message key={msg.id} message={msg} updateEmojiCount={updateEmojiCount} />))}
+                {messages.map(msg => (<Message key={msg.id} prevMsgUid={msg.key > 0 && this.getPrevMsgUid(msg.key)} message={msg} updateEmojiCount={updateEmojiCount} />))}
                 <div ref={el => this.messagesEnd = el}></div>
             </div >
         )

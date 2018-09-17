@@ -52,11 +52,13 @@ class Message extends Component {
                 </li>
             })
             : null
+
+            const hideHeader = this.props.prevMsgUid !== this.props.message.user.uid
         return (
-            <div className={`Message ${css(styles.message)}`} onClick={this.state.showEmojiPicker ? this.hideEmojiPicker : null} >
-                <Avatar user={message.user} />
+            <div className={`Message ${css(styles.message)} ${!hideHeader && css(styles.headerNone)}`} onClick={this.state.showEmojiPicker ? this.hideEmojiPicker : null} >
+                {hideHeader && <Avatar user={message.user} />}
                 <div className="details" style={styles.details}>
-                    <Metadata message={message} />
+                    {hideHeader && < Metadata message={message} />}
                     <div className="body">{message.body}</div>
                     <ul className={`emojiGroup ${css(styles.ul)}`}>
                         {emojiList}
@@ -93,6 +95,11 @@ const styles = StyleSheet.create({
         ':hover': {
             backgroundColor: '#f9f9f9',
         }
+    },
+    headerNone: {
+        marginLeft: 'calc(40px + .5rem)',
+        marginTop: 0,
+        paddingTop: 0,
     },
     details: {
         flex: 1,
