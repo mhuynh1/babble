@@ -1,28 +1,27 @@
 import React, { Component } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
-import { auth, googleProvider } from './base'
+import { auth, googleProvider, githubProvider } from './base'
 class SignIn extends Component {
     state = {
         email: ""
     }
 
-    authenticate = () => {
-        auth.signInWithPopup(googleProvider)
+    authenticate = (provider) => {
+        auth.signInWithPopup(provider)
     }
 
-    // handleChange = (e) => {
-    //     this.setState({ email: e.target.value })
-    // }
+    handleChange = (e) => {
+        this.setState({ email: e.target.value })
+    }
 
-    // handleSubmit = (e) => {
-    //     e.preventDefault()
-    //     this.props.handleAuth({
-    //         uid: `${this.state.email}-jfdku4jifu45423`,
-    //         displayName: this.state.email,
-    //         email: this.state.email
-    //     })
-    // }
+    handleSubmit = (e) => {
+        e.preventDefault()
+        auth.createUserWithEmailAndPassword(this.state.email, 'goauth')
+            .catch(() => {
+                    auth.signInWithEmailAndPassword(this.state.email, 'goauth')
+            })
+    }
 
     render() {
         return (
@@ -35,38 +34,53 @@ class SignIn extends Component {
                 <main className={css(styles.main)}>
                     <form
                         className={css(styles.form)}
-                        onSubmit={this.handleSubmit}
+                        // onSubmit={this.handleSubmit}
                     >
-                    <h2>Sign In</h2>
-                        {/* <label
+                        <h2>Sign In</h2>
+                        <label
                             htmlFor="email"
                             className={css(styles.label)}
                         >
-                            Email
-                    </label>
+                        </label>
                         <input type="email"
                             autoFocus
                             name="email"
                             value={this.state.email}
                             className={css(styles.input)}
                             onChange={this.handleChange}
-                            placeholder="Enter your email"
+                            placeholder="what's your email?"
                         />
+                        <label
+                            htmlFor="email"
+                            className={css(styles.label)}
+                        >
+                        </label>
+                        
                         <button
-                            type="submit"
+                            type="button"
+                            onClick={this.handleSubmit}
                             className={css(styles.button)}
                         >
-                            Sign In
-                        </button> */}
+                            go!
+                        </button>
+                        <h4>or</h4>
                         <div className={css(styles.buttonGroup)}>
                             <button
                                 type="button"
-                                onClick={this.authenticate}
-                                className={css(styles.button)}
+                                onClick={() => this.authenticate(githubProvider)}
+                                className={css(styles.button, styles.github)}
+                            >
+                                <i className={`fab fa-github ${css(styles.brandIcon)}`}></i>
+                                Sign in with Github
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => this.authenticate(googleProvider)}
+                                className={css(styles.button, styles.google)}
                             >
                                 <i className={`fab fa-google ${css(styles.brandIcon)}`}></i>
                                 Sign in with Google
-                        </button>
+                            </button>
                         </div>
                     </form>
                     <div className="blurb">
@@ -146,9 +160,12 @@ const styles = StyleSheet.create({
         padding: '1rem 2rem',
         fontSize: '1.2rem',
         borderRadius: '1rem',
-        backgroundColor: '#ff3333',
+        backgroundColor: '#3ac753',
         color: 'white',
         width: '20rem',
+    },
+    google: {
+        backgroundColor: '#ff3333',
     },
     github: {
         backgroundColor: '#6e5494',

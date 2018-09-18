@@ -11,7 +11,7 @@ import base, { auth } from './base'
 class App extends Component {
   constructor() {
     super()
-  
+
     this.state = {
       users: {}
     }
@@ -38,15 +38,14 @@ class App extends Component {
   handleAuth = (oAuthUser) => {
     const user = {
       uid: oAuthUser.uid,
-      displayName: oAuthUser.displayName,
+      displayName: oAuthUser.displayName || oAuthUser.email,
       email: oAuthUser.email,
-      photoUrl: oAuthUser.photoURL
+      photoUrl: oAuthUser.photoURL || null
     }
-    
+
     //add or update users list
     const users = { ...this.state.users }
     users[user.uid] = user
-    
     this.props.setUser(user)
     this.setState({ users })
     localStorage.setItem('user', JSON.stringify(user))
@@ -80,7 +79,7 @@ class App extends Component {
             render={() => (
               this.signedIn()
                 ? <Redirect to="/chat" />
-                : <SignIn />)}
+                : <SignIn handleAuth={this.handleAuth} />)}
           />
           <Route path="/:roomtype/:roomName"
             render={routerProps => (
