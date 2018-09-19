@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
         maxWidth: '800px',
         backgroundColor: 'white',
         boxShadow: '0 1px 1px rgba(0,0,0,.1)',
-        marginBottom: '2rem',
+        margin: 'auto auto 2rem',
         padding: '2rem',
     },
     h2: {

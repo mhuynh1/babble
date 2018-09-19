@@ -37,9 +37,8 @@ class SignIn extends Component {
                 <main className={css(styles.main)}>
                     <form
                         className={css(styles.form)}
-                        // onSubmit={this.handleSubmit}
                     >
-                        <h2>Sign In</h2>
+                        <h2 className={css(styles.h4)}>Sign In</h2>
                         <label
                             htmlFor="email"
                             className={css(styles.label)}
@@ -131,9 +130,10 @@ const styles = StyleSheet.create({
 
     form: {
         width: '100%',
+        maxWidth: '500px',
         backgroundColor: 'white',
         boxShadow: '0 1px 1px rgba(0,0,0,.1)',
-        marginBottom: '2rem',
+        margin: 'auto',
         paddingBottom: '2rem',
     },
     label: {
@@ -149,13 +149,16 @@ const styles = StyleSheet.create({
         marginTop: '1rem',
         marginBottom: '1rem',
         textAlign: 'center',
-        padding: '0.5rem',
+        padding: '0.5rem 0',
         ':focus': {
             outline: 0,
         },
     },
     h2: {
         fontWeight: 'normal',
+    },
+    h4:{
+        margin: '.5rem 0'
     },
     button: {
         display: 'block',
