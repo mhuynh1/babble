@@ -38,7 +38,7 @@ class App extends Component {
   handleAuth = (oAuthUser) => {
     const user = {
       uid: oAuthUser.uid,
-      displayName: oAuthUser.displayName || oAuthUser.email,
+      displayName: oAuthUser.displayName || oAuthUser.email.split('@')[0],
       email: oAuthUser.email,
       photoUrl: oAuthUser.photoURL || null
     }

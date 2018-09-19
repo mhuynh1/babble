@@ -9,6 +9,9 @@ class SignIn extends Component {
 
     authenticate = (provider) => {
         auth.signInWithPopup(provider)
+        .catch(err => {
+            console.log(err)
+        })
     }
 
     handleChange = (e) => {
