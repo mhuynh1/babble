@@ -1,15 +1,23 @@
-# yes, another chat app
+# aaand another chat app
 see it live here: [babble](https://babble-fe8b7.firebaseapp.com/)
 
+## App Features
+- direct messaging
+- private group messaging
+- authenticated sessions
+- google + github login with firebase oauth
+- add emoji reactions to messages
+- assigned avatar pic if no profile pic provided
 
 ## Technologies Used
-- React
-- Redux/react-redux
-- Firebase/react-rebase
-- Firebase/oauth
+- react
+- redux/react-redux
+- react router
+- firebase/react-rebase
+- firebase/oauth
+- aphrodite for CSS in JS
 
 ## App structure
-
 ```
 |--App
 |   |--SignIn
