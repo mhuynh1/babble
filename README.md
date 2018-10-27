@@ -2,12 +2,12 @@
 see it live here: [babble](https://babble-fe8b7.firebaseapp.com/)
 
 ## App Features
-- google + github login with firebase oauth
-- add emoji reactions to messages
 - direct messaging
 - private group messaging
 - authenticated sessions
-- assigned avatar pic if no profile retrieved from oauth sign-in
+- google + github login with firebase oauth
+- add emoji reactions to messages
+- assigned avatar pic if no profile pic provided
 
 ## Technologies Used
 - react
