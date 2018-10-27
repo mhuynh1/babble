@@ -1,4 +1,4 @@
-# yes, another chat app
+# aaand another chat app
 see it live here: [babble](https://babble-fe8b7.firebaseapp.com/)
 
 ## App Features
