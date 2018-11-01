@@ -7,6 +7,8 @@
     "aphrodite": "^2.2.3",
     "emoji-mart": "^2.8.1",
     "firebase": "^5.4.1",
+    "jest": "^23.6.0",
+    "merge": "^1.2.1",
     "moment": "^2.22.2",
     "re-base": "^4.0.0",
     "react": "^16.4.2",
